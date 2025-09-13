@@ -148,3 +148,7 @@ DOM의 “Node”는 문서의 모든 구성 요소를 표현하는 추상적 �
  - `hasChildNodes()`, `contains(node)` 등
 
 이러한 공통 인터페이스 덕분에, 자바스크립트로 DOM 트리를 유연하게 탐색하고 조작할 수 있습니다.
+
+### 참고/출처
+- [Traversing an HTML table with JavaScript and DOM Interfaces](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Traversing_an_HTML_table_with_JavaScript_and_DOM_Interfaces)
+- [Node - Web APIs | MDN](https://developer.mozilla.org/en-US/docs/Web/API/Node)
