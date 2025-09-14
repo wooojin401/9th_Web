@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>CSS transform 주요 함수 예제</title>
+  <style>
+    body {
+      background: #f7f7fa;
+      font-family: 'Pretendard', Arial, sans-serif;
+    }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      justify-content: center;
+      margin-top: 40px;
+    }
+    .demo-box {
+      width: 120px;
+      height: 120px;
+      background: #a259ff;
+      color: #fff;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      font-weight: 600;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      margin-bottom: 8px;
+      transition: transform 0.3s;
+    }
+    .translate { transform: translate(30px, 20px); background: #6dd5ed; }
+    .scale { transform: scale(1.3, 0.7); background: #ffb86c; }
+    .rotate { transform: rotate(20deg); background: #ff6b6b; }
+    .skew { transform: skew(20deg, 10deg); background: #43e97b; }
+    .matrix { transform: matrix(1, 0.3, 0.3, 1, 20, 10); background: #f9d423; color: #222; }
+    .label {
+      text-align: center;
+      font-size: 0.95rem;
+      color: #555;
+      min-height: 38px;
+    }
+  </style>
+</head>
+<body>
+  <h2 style="text-align:center;">CSS <code>transform</code> 주요 함수 예제</h2>
+  <div class="container">
+    <div>
+      <div class="demo-box translate">translate</div>
+      <div class="label">이동<br><code>transform: translate(30px, 20px)</code></div>
+    </div>
+    <div>
+      <div class="demo-box scale">scale</div>
+      <div class="label">크기 조절<br><code>transform: scale(1.3, 0.7)</code></div>
+    </div>
+    <div>
+      <div class="demo-box rotate">rotate</div>
+      <div class="label">회전<br><code>transform: rotate(20deg)</code></div>
+    </div>
+    <div>
+      <div class="demo-box skew">skew</div>
+      <div class="label">기울이기<br><code>transform: skew(20deg, 10deg)</code></div>
+    </div>
+    <div>
+      <div class="demo-box matrix">matrix</div>
+      <div class="label">행렬 변환<br><code>transform: matrix(1, 0.3, 0.3, 1, 20, 10)</code></div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!-- filename: box-sizing-border-outline-all-cases.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>box-sizing, border, outline 모든 케이스 실습</title>
+  <style>
+    h2 {
+      margin-top: 40px;
+      margin-bottom: 10px;
+    }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+      margin-bottom: 40px;
+    }
+    .case {
+      background: #fff;
+      border-radius: 10px;
+      padding: 20px 16px 16px 16px;
+      width: 220px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .label {
+      font-size: 15px;
+      margin-bottom: 10px;
+      color: #6a4c93;
+      font-weight: 600;
+      text-align: center;
+      min-height: 38px;
+    }
+    .box {
+      width: 100px;
+      height: 100px;
+      background: #a259ff;
+      color: #fff;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+  <h1>box-sizing, border, outline 모든 케이스 실습</h1>
+
+  <h2>1. box-sizing: content-box</h2>
+  <div class="container">
+    <div class="case">
+      <div class="label">content-box<br>(기본)</div>
+      <div class="box" style="box-sizing: content-box;">100x100</div>
+      <div>border/padding 없음</div>
+    </div>
+    <div class="case">
+      <div class="label">content-box<br>+ border</div>
+      <div class="box" style="box-sizing: content-box; border: 10px solid #ff595e;">border</div>
+      <div>실제 크기 120x120</div>
+    </div>
+    <div class="case">
+      <div class="label">content-box<br>+ outline</div>
+      <div class="box" style="box-sizing: content-box; outline: 10px solid #ffca3a;">outline</div>
+      <div>실제 크기 100x100<br>outline은 바깥에만</div>
+    </div>
+    <div class="case">
+      <div class="label">content-box<br>+ border + outline</div>
+      <div class="box" style="box-sizing: content-box; border: 10px solid #1982c4; outline: 10px solid #ffca3a;">둘 다</div>
+      <div>실제 크기 120x120<br>outline은 바깥에만</div>
+    </div>
+    <div class="case">
+      <div class="label">content-box<br>+ padding</div>
+      <div class="box" style="box-sizing: content-box; padding: 10px;">padding</div>
+      <div>실제 크기 120x120</div>
+    </div>
+    <div class="case">
+      <div class="label">content-box<br>+ border + padding</div>
+      <div class="box" style="box-sizing: content-box; border: 10px solid #6a4c93; padding: 10px;">border+padding</div>
+      <div>실제 크기 140x140</div>
+    </div>
+    <div class="case">
+      <div class="label">content-box<br>+ border + padding + outline</div>
+      <div class="box" style="box-sizing: content-box; border: 10px solid #6a4c93; padding: 10px; outline: 10px solid #ffca3a;">all</div>
+      <div>실제 크기 140x140<br>outline은 바깥에만</div>
+    </div>
+  </div>
+
+  <h2>2. box-sizing: border-box</h2>
+  <div class="container">
+    <div class="case">
+      <div class="label">border-box<br>(기본)</div>
+      <div class="box" style="box-sizing: border-box;">100x100</div>
+      <div>border/padding 없음</div>
+    </div>
+    <div class="case">
+      <div class="label">border-box<br>+ border</div>
+      <div class="box" style="box-sizing: border-box; border: 10px solid #ff595e;">border</div>
+      <div>실제 크기 100x100</div>
+    </div>
+    <div class="case">
+      <div class="label">border-box<br>+ outline</div>
+      <div class="box" style="box-sizing: border-box; outline: 10px solid #ffca3a;">outline</div>
+      <div>실제 크기 100x100<br>outline은 바깥에만</div>
+    </div>
+    <div class="case">
+      <div class="label">border-box<br>+ border + outline</div>
+      <div class="box" style="box-sizing: border-box; border: 10px solid #1982c4; outline: 10px solid #ffca3a;">둘 다</div>
+      <div>실제 크기 100x100<br>outline은 바깥에만</div>
+    </div>
+    <div class="case">
+      <div class="label">border-box<br>+ padding</div>
+      <div class="box" style="box-sizing: border-box; padding: 10px;">padding</div>
+      <div>실제 크기 100x100</div>
+    </div>
+    <div class="case">
+      <div class="label">border-box<br>+ border + padding</div>
+      <div class="box" style="box-sizing: border-box; border: 10px solid #6a4c93; padding: 10px;">border+padding</div>
+      <div>실제 크기 100x100</div>
+    </div>
+    <div class="case">
+      <div class="label">border-box<br>+ border + padding + outline</div>
+      <div class="box" style="box-sizing: border-box; border: 10px solid #6a4c93; padding: 10px; outline: 10px solid #ffca3a;">all</div>
+      <div>실제 크기 100x100<br>outline은 바깥에만</div>
+    </div>
+  </div>
+</body>
+</html>

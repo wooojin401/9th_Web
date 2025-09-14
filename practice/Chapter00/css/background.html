@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>background 속성 실습 통합 예제</title>
+  <style>
+    .background-demo {
+      width: 90vw;
+      max-width: 600px;
+      height: 300px;
+      margin: 40px auto;
+      border-radius: 16px;
+      border: 2px solid #a259ff;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+
+      /* background-image: 여러 이미지와 그라디언트 레이어 적용 */
+      background-image:
+        url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80'),
+        linear-gradient(135deg, #a259ff 0%, #f7f7fa 100%);
+
+      /* background-repeat: 반복 없음 */
+      background-repeat: no-repeat, no-repeat;
+
+      /* background-position: 첫 번째 이미지는 오른쪽 하단, 두 번째는 전체 */
+      background-position: right bottom, left top;
+
+      /* background-size: 첫 번째 이미지는 contain, 두 번째(그라디언트)는 auto */
+      background-size: contain, auto;
+
+      /* background-color: fallback 색상 */
+      background-color: #00001d;
+    }
+
+    .info {
+      max-width: 600px;
+      margin: 0 auto 24px auto;
+      padding: 16px;
+      background: #fff;
+      border-radius: 8px;
+      font-size: 1rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+  </style>
+</head>
+<body>
+  <div class="info">
+    <strong>background-image:</strong> 여러 이미지를 쉼표로 구분해 레이어로 적용<br>
+    <strong>background-repeat:</strong> 이미지 반복 방식 지정<br>
+    <strong>background-position:</strong> 이미지 위치 지정<br>
+    <strong>background-size:</strong> 이미지 크기 지정<br>
+    <strong>background-color:</strong> 배경색 지정<br>
+  </div>
+  <div class="background-demo"></div>
+</body>
+</html>
