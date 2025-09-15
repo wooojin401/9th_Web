@@ -149,6 +149,54 @@ DOM의 “Node”는 문서의 모든 구성 요소를 표현하는 추상적 �
 
 이러한 공통 인터페이스 덕분에, 자바스크립트로 DOM 트리를 유연하게 탐색하고 조작할 수 있습니다.
 
+### Node와 Element의 차이: DOM 구조와 실제 활용
+
+지금까지 DOM 트리의 생성 과정과 주요 속성, 메서드에 대해 살펴봤습니다. 여기서 DOM 트리를 구성하는 핵심 단위인 **Node**와 그 중 하나인 **Element**의 차이에 대해 이어서 정리합니다.
+
+#### Node란?
+Node는 DOM(Document Object Model) 트리의 모든 구성 요소를 포괄하는 가장 기본적인 단위입니다.  
+HTML 문서가 브라우저에서 파싱될 때, 태그, 텍스트, 주석 등 각각의 부분이 모두 Node로 변환됩니다.  
+Node에는 다양한 타입이 있습니다:
+- **Document Node**: 문서 전체를 나타내는 루트 노드
+- **Element Node**: HTML 태그(예: `<div>`, `<a>`)를 나타내는 노드
+- **Text Node**: 태그 내부의 텍스트(예: `<p>Hello</p>`의 "Hello")
+- **Comment Node**: HTML 주석(예: `<!-- 주석 -->`)
+- 그 외에도 Attribute Node, DocumentType Node 등이 존재합니다.
+
+즉, Node는 DOM 트리의 모든 구성 요소를 포괄하는 추상적 개념입니다.
+
+#### Element란?
+Element는 Node의 하위 타입 중 하나로, 실제 HTML이나 XML 태그를 의미합니다.  
+Element Node는 구조적인 역할을 하며, `id`, `class`, `style` 등 HTML 속성을 가질 수 있고,  
+`querySelector()`, `getElementsByClassName()` 등 다양한 메서드를 사용할 수 있습니다.
+
+모든 Element는 Node이지만, 모든 Node가 Element는 아닙니다.  
+예를 들어, 텍스트 노드나 주석 노드는 Node이지만 Element가 아닙니다.
+
+#### 주요 속성의 차이
+
+- `textContent`: Node의 속성이므로 모든 Node에서 사용 가능합니다.  
+  즉, Element Node, Text Node, Comment Node 모두에서 접근할 수 있습니다.
+- `innerHTML`: Element의 속성이므로 Element Node에서만 사용 가능합니다.  
+  Text Node나 Comment Node에서는 사용할 수 없습니다.
+
+#### 자식 노드 선택 방법: childNodes vs children
+
+- `childNodes`: Node의 속성.  
+  해당 요소의 모든 자식 Node를 포함하는 NodeList를 반환합니다.  
+  여기에는 Element뿐 아니라 Text Node, Comment Node 등 모든 종류의 Node가 포함됩니다.
+- `children`: Element의 속성.  
+  Element 타입의 자식 노드만을 포함하는 HTMLCollection을 반환합니다.  
+  텍스트 노드나 주석 노드는 제외되고, HTML 요소 노드만 포함됩니다.
+
+#### 실제 활용에서 주의할 점
+
+- 자바스크립트로 DOM 트리를 탐색하거나 조작할 때,  
+  Node와 Element의 차이를 이해하면 원하는 노드만 정확하게 선택할 수 있습니다.
+- 예를 들어, `childNodes[0]`은 공백이나 텍스트 노드가 포함될 수 있지만,  
+  `children[0]`은 항상 첫 번째 HTML 태그 요소만 반환합니다.
+- 빈 공백(화이트 스페이스)이나 주석도 Node로 취급되기 때문에, Node 기반 탐색 시 예상치 못한 결과가 나올 수 있습니다.
+
 ### 참고/출처
 - [Traversing an HTML table with JavaScript and DOM Interfaces](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Traversing_an_HTML_table_with_JavaScript_and_DOM_Interfaces)
 - [Node - Web APIs | MDN](https://developer.mozilla.org/en-US/docs/Web/API/Node)
