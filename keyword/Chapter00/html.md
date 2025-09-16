@@ -1,14 +1,5 @@
 # HTML
 
-## 목차
-1. [HTML이란?](#1-html이란)
-2. [Semantic Tag](#2-semantic-tag)
-3. [HTML 구성 요소](#3-html-구성-요소)
-4. [태그 정리](#4-태그-정리)
-5. [DOM](#5-dom)
-
----
-
 ### 키워드 리스트
 > HTML, Semantic Tag, html element, head, body
 

@@ -4,23 +4,6 @@
 
 > CSS, box-sizing, border/outline, relative/absolute, fixed/sticky, 정렬, 반응형, transform, transition, animation, BEM
 
----
-
-## 목차
-
-* CSS 개념
-* box-sizing
-* border / outline
-* position (relative / absolute / fixed / sticky)
-* 정렬
-* 반응형 background
-* transform
-* transition
-* animation
-* BEM (추가 예정)
-
----
-
 ## 1. CSS란?
 
 ### 개념
