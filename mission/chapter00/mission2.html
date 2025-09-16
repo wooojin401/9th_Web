@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Layout Example</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      text-align: center;
+      color: white;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    /* 전체 컨테이너 */
+    .container {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* 상단: Header + Menu */
+    .top {
+      display: flex;
+    }
+    .header {
+      flex: 1;
+      background: #1a2233;
+      padding: 40px 0;
+    }
+    .menu {
+      flex: 2;
+      background: #e74c3c;
+      padding: 40px 0;
+    }
+
+    /* Hero 영역 */
+    .hero {
+      background: #4a89dc;
+      padding: 100px 0;
+    }
+
+    /* 메인 영역 (grid 활용) */
+    .content {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 10px;
+      min-height: 300px;
+    }
+
+    .main {
+      grid-row: span 2; /* 세로 두 칸 차지 */
+      background: #233142;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .blank {
+      grid-row: span 2; /* 흰색 공백 */
+      background: #fff;
+      color: black;
+    }
+
+    .image {
+      background: #a8dadc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .extra {
+      background: #2ecc71;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Banner */
+    .banner {
+      background: #f6c667;
+      padding: 60px 0;
+      color: black;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- 상단 -->
+    <div class="top">
+      <div class="header">HEADER</div>
+      <div class="menu">MENU</div>
+    </div>
+
+    <!-- Hero -->
+    <div class="hero">HERO</div>
+
+    <!-- Content -->
+    <div class="content">
+      <div class="main">MAIN</div>
+      <div class="blank"></div>
+      <div class="image">IMAGE</div>
+      <div class="extra">EXTRA</div>
+    </div>
+
+    <!-- Banner -->
+    <div class="banner">BANNER</div>
+  </div>
+</body>
+</html>

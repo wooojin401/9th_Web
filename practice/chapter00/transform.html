@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Transform Test</title>
+  <style>
+    .box {
+      width: 100px;
+      height: 100px;
+      margin: 20px;
+      background: #4a89dc;
+      color: white;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .translate { transform: translate(50px, 20px); }
+    .scale     { transform: scale(1.5); }
+    .rotate    { transform: rotate(30deg); }
+    .skew      { transform: skew(20deg, 10deg); }
+    .matrix    { transform: matrix(1, 0.3, 0.5, 1, 30, 10); }
+  </style>
+</head>
+<body>
+  <div class="box translate">translate</div>
+  <div class="box scale">scale</div>
+  <div class="box rotate">rotate</div>
+  <div class="box skew">skew</div>
+  <div class="box matrix">matrix</div>
+</body>
+</html>

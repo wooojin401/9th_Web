@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Transition Test</title>
+  <style>
+    body {
+      display: flex;
+      gap: 20px;
+      padding: 40px;
+      font-family: sans-serif;
+    }
+    .box {
+      width: 100px;
+      height: 100px;
+      background: #4a89dc;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 12px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* 1. transition-property */
+    .property {
+      transition-property: background-color;
+      transition-duration: 0.5s;
+    }
+    .property:hover { background-color: #e74c3c; }
+
+    /* 2. transition-duration */
+    .duration {
+      transition: all 2s;
+    }
+    .duration:hover {
+      background: #2ecc71;
+      transform: scale(1.5);
+    }
+
+    /* 3. transition-timing-function */
+    .timing {
+      transition: all 1s ease-in-out;
+    }
+    .timing:hover {
+      transform: translateX(80px);
+      background: #f39c12;
+    }
+
+    /* 4. transition-delay */
+    .delay {
+      transition: all 1s ease;
+      transition-delay: 1s;
+    }
+    .delay:hover {
+      transform: rotate(45deg);
+      background: #9b59b6;
+    }
+
+   
+  </style>
+</head>
+<body>
+  <div class="box property">property</div>
+  <div class="box duration">duration</div>
+  <div class="box timing">timing</div>
+  <div class="box delay">delay</div>
+</body>
+</html>

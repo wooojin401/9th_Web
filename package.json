@@ -1,0 +1,23 @@
+{
+  "name": "9th_web",
+  "version": "1.0.0",
+  "description": "UMC-9th Web 워크북 &amp; 미션 제출 레포지토리입니다!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wooojin401/9th_Web.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wooojin401/9th_Web/issues"
+  },
+  "homepage": "https://github.com/wooojin401/9th_Web#readme",
+  "devDependencies": {
+    "typescript": "^5.9.2"
+  }
+}
