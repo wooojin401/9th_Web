@@ -2094,3 +2094,27 @@ HTML 요소는 여러분이 직접 만들어서, 가운데 정렬을 구현한 �
                 - 새로운 개발자 코드 이해 용이 : 일관된 규칙으로 누구나 코드 파악 가능
                 - CSS 충돌 X : 더이상 `!important` 를 남발하지 않을 수 있음
 
+
+- 미션 1 - 반응형 디자인을 구현하면서 알게 된 개념, 사용한 CSS 속성을 정리한 내용
+    - **미디어 쿼리 (Media Query)**
+        - 특정 화면 크기 조건을 지정하여 CSS를 다르게 적용할 수 있습니다
+        - ex)  `@media (max-width: 768px) { ... }` → 화면이 768px 이하일 때 실행됩니다
+    - **고정된 요소 vs 상대적 요소**
+        - `position: fixed`를 사용하면 화면 스크롤과 상관없이 항상 같은 위치에 고정됩니다
+        - `position: relative`와 `absolute`는 컨테이너 안에서 상대 / 절대적인 위치를 고정합니다
+    
+    - **사용한 CSS 속성**
+        1. 위치 관련 속성 (`position, transform, translate`)
+        2. 레이아웃 관련 속성 (`display, flex-direction: column, justify-content: space-between`)
+        3. 크기 / 간격 속성 (`gap, padding, margin`)
+        4. 색상 / 배경 속성 (`background-color, transition`)
+        5. 반응형 관련 속성 
+            1. `@media (max-width: 768px)`
+                
+                ⇒ 화면이 768px 이하일 때 Navbar를 숨기고 햄버거 메뉴를 표시
+                
+            2. `display: none; / display: block;`
+                
+                ⇒ 반응형 구간에 따라 메뉴를 보이게 하거나 숨긴다
+                
+        6. 인터랙션 관련 속성 (`cursor: pointer, hover`)
