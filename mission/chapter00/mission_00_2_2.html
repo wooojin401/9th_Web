@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> CSS grid 실습 </title>
+    <script src="practice.js"></script>
+
+    <style>
+        .container {
+            display: grid;
+
+            grid-template-rows: 100px 250px 150px 150px 150px;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+
+            color: white;
+
+            height: 800px;
+            width:600px;
+
+            font-size: x-large;
+        }
+
+        .container__header {
+            position: relative;
+
+            background-color: black;
+
+            grid-row-start: 1;
+            grid-row-end: 2;
+            grid-column-start: 1;
+            grid-column-end: 2;
+
+            display: flex;
+
+            justify-content: space-around; 
+            align-items: center;  
+        }
+
+        .container__menu {
+            position: relative;
+
+            background-color: crimson;
+
+            grid-row-start: 1;
+            grid-row-end: 2;
+            grid-column-start: 2;
+            grid-column-end: 5;
+
+            display: flex;
+            
+            justify-content: space-around; 
+            align-items: center;  
+        }
+
+        .container__hero {
+            position: relative;
+
+            background-color: dodgerblue;
+
+            grid-row-start: 2;
+            grid-row-end: 3;
+            grid-column-start: 1;
+            grid-column-end: 5;
+        
+            display: flex;
+            
+            justify-content: space-around; 
+            align-items: center;  
+        }
+
+        .container__main {
+            background-color: cadetblue;
+
+            grid-row-start: 3;
+            grid-row-end: 5;
+            grid-column-start: 1;
+            grid-column-end: 3;
+
+            display: flex;
+            
+            justify-content: space-around; 
+            align-items: center;  
+        }
+
+        .container__image {
+            background-color: palevioletred;
+
+            color: black;
+
+            grid-row-start: 3;
+            grid-row-end: 4;
+            grid-column-start: 4;
+            grid-column-end: 5;
+
+            display: flex;
+            
+            justify-content: space-around; 
+            align-items: center;  
+        }
+
+        .container__extra {
+            background-color: violet;
+
+            color: black;
+
+            grid-row-start: 4;
+            grid-row-end: 5;
+            grid-column-start: 4;
+            grid-column-end: 5;
+
+            display: flex;
+            
+            justify-content: space-around; 
+            align-items: center;  
+        }
+
+        .container__banner {
+            background-color: yellow;
+
+            color: black;
+
+            grid-row-start: 5;
+            grid-row-end: 6;
+            grid-column-start: 1;
+            grid-column-end: 5;
+
+            display: flex;
+            
+            justify-content: space-around; 
+            align-items: center;  
+        }
+</style>
+</head>
+    <body>
+        <div class="container">
+            <div class="container__header"> HEADER </div>
+            <div class="container__menu"> MENU </div>
+            <div class="container__hero"> HERO </div>
+            <div class="container__main"> MAIN </div>
+            <div class="container__image"> IMAGE </div>
+            <div class="container__extra"> EXTRA </div>
+            <div class="container__banner"> BANNER </div>
+        </div>
+    </body>
+</html>
