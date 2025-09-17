@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .box {
+        width: 200px;
+        height: 200px;
+        background-color: green;
+        animation-name: mover;
+        animation-duration: 1s;
+        animation-direction: normal;
+      }
+
+      @keyframes mover {
+        from {
+          transform: translate(0, 0);
+        }
+        to {
+          transform: translate(200px, 200px);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box"></div>
+  </body>
+</html>
