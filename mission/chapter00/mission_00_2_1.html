@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>navbar CSS 실습</title>
+    <style>
+        body {
+        background-color: #121212; 
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        margin: 0;
+        transition: background-color 0.3s ease;
+        padding-top: 80px;
+        }
+
+        .navbar {
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        height: 60px;
+        background-color: black;
+        display: flex;
+        align-items: center;
+        padding: 10px 20px;
+        border-radius: 50px;
+        transition: background-color 0.3s ease;
+        z-index: 1001;
+        }
+
+        .navbar__highlight {
+        position: absolute;
+        top: 15px; 
+        height: 50px; 
+        background-color: palegreen;
+        border-radius: 50px; 
+        transition: all 0.4s ease-in-out; 
+        z-index: 1;
+        }
+
+        .navbar__list {
+        list-style-type: none;
+        display: flex;
+        gap: 15px;
+        margin: 0;
+        padding: 0;
+        }
+
+        .navbar__button {
+        background: none;
+        border: none;
+        padding: 10px 20px;
+        font: inherit;
+        cursor: pointer; 
+        color: white; 
+        font-size: 16px;
+        font-weight: 500;
+        position: relative;
+        z-index: 2;
+        transition: color 0.3s ease;
+        }
+
+        .navbar__button:hover {
+        color: gray;
+        }
+
+        .menu-toggle {
+        display: none;
+        position: fixed;  
+        top: 20px;
+        right: 20px;
+        z-index: 1100;
+        }
+
+        .menu-toggle__button {
+        font-size: 28px;
+        cursor: pointer;
+        background: none;
+        border: none;
+        color: white;
+        transition: color 0.3s ease;
+        }
+
+        .sidebar {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 300px;
+        height: 100%;
+        background-color: #1a1a1a;
+        transition: right 0.3s ease;
+        padding: 40px 30px;
+        box-shadow: -2px 0 10px rgba(0,0,0,0.5);
+        z-index: 2000;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        }
+
+        .sidebar--open {
+        right: 0;
+        }
+
+        .sidebar__close {
+        font-size: 24px;
+        cursor: pointer;
+        background: none;
+        border: none;
+        color: white;
+        align-self: flex-end;
+        margin-bottom: 40px;
+        }
+
+        .sidebar__list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+        }
+
+        .sidebar__item {
+        font-size: 22px;
+        font-weight: bold;
+        cursor: pointer;
+        color: white;
+        transition: color 0.3s ease;
+        }
+
+        .sidebar__item.active {
+        color: #00b140;
+        }
+
+        .sidebar__item:hover {
+        color: #00b140;
+        }
+
+        .sidebar__footer {
+        font-size: 14px;
+        color: gray;
+        text-align: center;
+        border-top: 1px solid #333;
+        padding-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+        .navbar {
+            display: none;
+        }
+        .menu-toggle {
+            display: block;
+        }
+        }
+    </style>
+    </head>
+    <body>
+    <nav class="navbar">
+        <div class="navbar__highlight"></div> 
+        <ul class="navbar__list">
+        <li><button id="logo" class="navbar__button">LOGO</button></li>
+        <li><button id="projects" class="navbar__button">Projects</button></li>
+        <li><button id="members" class="navbar__button">Members</button></li>
+        <li><button id="faq" class="navbar__button">FAQ</button></li>
+        </ul>
+    </nav>
+
+    <div class="menu-toggle">
+        <button class="menu-toggle__button" id="openSidebar">☰</button>
+    </div>
+    
+    <aside class="sidebar" id="sidebar">
+        <button class="sidebar__close" id="closeSidebar">✖</button>
+        <ul class="sidebar__list">
+        <li class="sidebar__item" data-page="logo">Home</li>
+        <li class="sidebar__item" data-page="projects">Projects</li>
+        <li class="sidebar__item" data-page="members">Members</li>
+        <li class="sidebar__item" data-page="faq">FAQ</li>
+        </ul>
+        <div class="sidebar__footer">© SMUMC 2025.</div>
+    </aside>
+
+    <script>
+        const highlight = document.querySelector(".navbar__highlight");
+        const buttons = document.querySelectorAll(".navbar__button");
+        const body = document.querySelector("body");
+        const navbar = document.querySelector(".navbar");
+        const openBtn = document.getElementById("openSidebar");
+        const sidebar = document.getElementById("sidebar");
+        const closeBtn = document.getElementById("closeSidebar");
+        const sidebarItems = document.querySelectorAll(".sidebar__item");
+
+        const firstBtn = document.getElementById("logo");
+        moveHighlight(firstBtn);
+        setActiveSidebarItem("logo");
+
+        buttons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            moveHighlight(btn);
+            changeTheme(btn.id);
+            setActiveSidebarItem(btn.id);
+        });
+        });
+
+        sidebarItems.forEach(item => {
+        item.addEventListener("click", () => {
+            setActiveSidebarItem(item.dataset.page);
+            const navBtn = document.getElementById(item.dataset.page);
+            if (navBtn) {
+            moveHighlight(navBtn);
+            changeTheme(navBtn.id);
+            }
+            sidebar.classList.remove("sidebar--open");
+        });
+        });
+
+        function moveHighlight(btn) {
+        highlight.style.left = btn.offsetLeft + "px";
+        highlight.style.width = btn.offsetWidth + "px";
+        }
+
+        function setActiveSidebarItem(pageId) {
+        sidebarItems.forEach(item => {
+            item.classList.remove("active");
+            if (item.dataset.page === pageId) {
+            item.classList.add("active");
+            }
+        });
+        }
+
+        function changeTheme(pageId) {
+        if (pageId === "members" || pageId === "faq") {
+            body.style.backgroundColor = "white";
+            navbar.style.backgroundColor = "gray";
+            openBtn.style.color = "black";
+        } else {
+            body.style.backgroundColor = "#121212";
+            navbar.style.backgroundColor = "black";
+            openBtn.style.color = "white";
+        }
+        }
+
+        openBtn.addEventListener("click", () => {
+        sidebar.classList.add("sidebar--open");
+        });
+
+        closeBtn.addEventListener("click", () => {
+        sidebar.classList.remove("sidebar--open");
+        });
+    </script>
+</body>
+</html>
