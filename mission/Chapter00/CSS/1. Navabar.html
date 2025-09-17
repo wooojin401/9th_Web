@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      .navbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        position: fixed;
+        top: 10px;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+      }
+
+      .sidebar {
+        position: fixed;
+        top: 0;
+        right: -250px;
+        width: 250px;
+        height: 100%;
+        transition: right 0.3s ease;
+        background-color: gray;
+      }
+
+      .sidebar__menu {
+        list-style: none;
+        gap: 30px;
+      }
+
+      .sidebar__menu-list {
+        padding: 30px 20px;
+        font-size: 25px;
+      }
+
+      .sidebar__menu-list a {
+        text-decoration: none;
+        color: white;
+        transition: font-size 0.25s;
+      }
+
+      .hamburger {
+        display: none;
+        font-size: 30px;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 50%;
+        background-color: gray;
+        position: fixed;
+        top: 50px;
+        right: 50px;
+        z-index: 1000;
+        cursor: pointer;
+      }
+
+      @media (max-width: 750px) {
+        .navbar {
+          display: none;
+        }
+
+        .hamburger {
+          display: block;
+        }
+      }
+
+      .navbar__logo {
+        font-weight: bold;
+      }
+
+      .navbar__menu {
+        display: flex;
+        list-style: none;
+        gap: 30px;
+        margin: 0;
+        padding: 20px;
+        border-radius: 30px;
+        background-color: rgba(22, 22, 22, 0.5);
+      }
+
+      .navbar__menu-list a {
+        text-decoration: none;
+        font-size: 15px;
+        border-radius: 30px;
+        padding: 10px;
+        color: #fff;
+        transition: color 0.5s;
+      }
+
+      .navbar__menu-list a:hover {
+        color: rgb(206, 206, 206);
+      }
+
+      .sidebar__menu-list a:hover {
+        font-size: 18px;
+      }
+
+      .navbar__menu-list a:active {
+        background-color: green;
+      }
+
+      #menu-toggle:checked + .hamburger + .sidebar {
+        right: 0;
+        content: "\00d7";
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar">
+      <ul class="navbar__menu">
+        <li class="navbar__menu-list"><a href="#">Logo</a></li>
+        <li class="navbar__menu-list"><a href="#">Projects</a></li>
+        <li class="navbar__menu-list"><a href="#">Members</a></li>
+        <li class="navbar__menu-list"><a href="#">FAQ</a></li>
+      </ul>
+    </nav>
+
+    <input type="checkbox" id="menu-toggle" hidden />
+    <label for="menu-toggle" class="hamburger">&#9776;</label>
+
+    <div class="sidebar">
+      <ul class="sidebar__menu">
+        <li class="sidebar__menu-list"><a href="#">Home</a></li>
+        <li class="sidebar__menu-list"><a href="#">Projects</a></li>
+        <li class="sidebar__menu-list"><a href="#">Members</a></li>
+        <li class="sidebar__menu-list"><a href="#">FAQ</a></li>
+      </ul>
+    </div>
+  </body>
+</html>
