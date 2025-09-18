@@ -1,0 +1,137 @@
+<!-- animation실습 -->
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width" initial-scale="1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Bounce Ball</title>
+        <style>
+            body{
+                height:100vh;
+                background-color:white;
+                display:grid;
+                place-items:center;
+            }
+            .ball{
+                width:100px;
+                height:100px;
+                border-radius:50%;
+                background-color:purple;
+                animation:bounce 1.2s infinite;
+                will-change:transform;
+            }
+            @keyframes bounce {
+                /* 바닥에서 약간 찌그러짐 → 최고점에서 살짝 늘어남 */
+                0%   { transform: translateY(0)         scale(1.1, 0.9); }
+                33%  { transform: translateY(-140px)    scale(1, 1); }
+                66%  { transform: translateY(0)         scale(1,1); }
+                100% { transform: translateY(0)         scale(1.1, 0.9); }
+                }
+        </style>
+    </head>
+    <body>
+        <div class="ball"></div>
+    </body>
+</html>
+<!-- transition 실습 -->
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width" initial-scale="1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>transition 실습</title>
+        <style>
+            body{
+                display:flex;
+                flex-direction:column;
+                align-items:center;
+                gap:60px;
+                margin-top:40px;
+            }
+            .diamond{
+                width:120px;
+                height: 120px;
+                background-color:pink;
+                transform:rotate(45deg);
+                transition:background-color 0.5s ease;
+            }
+            .diamond:hover{
+                background-color:purple;
+            }
+
+            
+        </style>
+    </head>
+    <body>
+        <div class="diamond"></div>
+        <div class="diamond"></div>
+        <div class="diamond"></div>
+    </body>
+</html>
+<!-- absolute/relative 실습 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /** 전체 선택자 기본적으로 설정된 마진을 없앰. */
+    * {
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    .box1 {
+      width: 500px;
+      height: 500px;
+      background-color: purple;
+      color: white;
+      position: relative;
+    }
+
+    .box2 {
+      width: 200px;
+      height: 200px;
+      background-color: yellow;
+      position:absolute;
+      top:0px;
+      left:0px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box1">BOX1</div>
+  <h1 class="box2">BOX2</h1>
+</body>
+
+</html>
+
+<!-- relative / absolute 실습 -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width", initial-scale="1.0">
+        <title>Document</title>
+        <style>
+            .box{
+                width:100px;
+                height:100px;
+                background-color:purple;
+                color:white;
+                box-sizing:border-box;
+                position:relative;
+                bottom:-150px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="box">BOX</div>
+        <h1>고구마 상자</h1>
+    </body>
+</html>
