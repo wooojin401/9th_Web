@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .circle {
+            width: 100px;
+            height: 100px;
+            margin: 100px;
+            background-color: mediumspringgreen;
+            border-radius: 50%;
+
+            animation: move 1s ease-in-out infinite alternate;
+         
+
+     }
+     @keyframes move {
+      from {
+        transform: translateY(0) scaleY(1);
+      }
+      to {
+        transform: translateY(300px) scaleY(0.7);
+      }
+    }
+    </style>
+</head>
+<body>
+    <div class="circle"></div>
+</body>
+</html>

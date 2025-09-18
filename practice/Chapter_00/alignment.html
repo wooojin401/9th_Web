@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div style="
+        text-align: center; 
+        border: 1px solid #ccc; 
+        padding: 20px;">
+        text-align으로 가운데!
+    </div>
+
+    <div style="
+    margin: auto;
+    border: 1px solid #ccc; 
+    padding: 20px;
+    text-align: center;
+    ">margin으로 가운데!</div>
+
+    <div style="
+    display: flex;
+    justify-content: center;
+    border: 1px solid #ccc;
+    padding: 20px;
+    ">flex로 가운데!</div>
+
+    <div style="position: relative; border: 1px solid #ccc; padding: 30px;">
+        <div style="
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        ">
+        translate로 가운데!
+    </div>
+  </div>
+
+    <div style="
+        display: grid;
+        place-items: center;
+        height: 60px;
+        border: 1px solid #ccc;
+    ">
+        Grid로 가운데!
+    </div>
+</body>
+</html>

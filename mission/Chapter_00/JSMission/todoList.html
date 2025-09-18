@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UMC Study Plan</title>
+<link rel="stylesheet" href="todoList.css">
+</head>
+<body>
+
+<header>UMC Study Plan</header>
+
+<div class="input-box">
+    <input type="text" placeholder="스터디 계획을 작성해보세요" id="todo-input">
+</div>
+
+<div id="todo-list">
+    <section id="will">
+        <div class="section-header"><strong>해야 할 일</strong></div>
+        <div class="todo-container"></div>
+    </section>
+    <section id="did">
+        <div class="section-header"><strong>해낸 일</strong></div>
+        <div class="todo-container"></div>
+    </section>
+</div>
+
+<script>const input = document.querySelector('#todo-input');
+    const willContainer = document.querySelector('#will .todo-container');
+    const didContainer = document.querySelector('#did .todo-container');
+    
+    input.addEventListener('keyup', (e) => {
+        if(e.key === 'Enter' && input.value.trim() !== '') {
+            e.preventDefault(); 
+            const todoText = input.value;
+    
+            const item = document.createElement('div');
+            item.className = 'todo-item';
+    
+            const span = document.createElement('span');
+            span.textContent = todoText;
+    
+            const completeButton = document.createElement('button');
+            completeButton.textContent = '완료';
+  
+
+            //완료버튼클릭시 해낸일로이동
+            completeButton.addEventListener('click', () => {
+                didContainer.appendChild(item);
+                completeButton.remove();
+
+
+                const deleteBtn = document.createElement('button');
+                deleteBtn.textContent = '삭제';
+                deleteBtn.addEventListener('click', () => {
+                 item.remove();
+                });
+                item.appendChild(deleteBtn);
+
+            });
+          
+    
+            item.appendChild(span);
+            item.appendChild(completeButton);
+            willContainer.appendChild(item);
+    
+            input.value = '';
+        }
+    });
+    
+
+ 
+</script>
+
+</body>
+</html>
