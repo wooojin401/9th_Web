@@ -1,0 +1,8 @@
+- **Flex**
+    - `display: flex`, `align-items: center`, `justify-content: center` → 블록 내부 중앙 정렬
+- **Grid**
+    - `display: grid`, `grid-template-areas`, `grid-template-columns/rows` → 전체 레이아웃 틀 구성
+    - `grid-column`, `grid-row` → 특정 요소의 위치 지정
+- **반응형**
+    - `@media (max-width: 960px) { ... }` → 뷰포트 크기에 따라 레이아웃 전환
+    - `clamp(min, preferred, max)` → 글자 크기를 반응형으로 설정
