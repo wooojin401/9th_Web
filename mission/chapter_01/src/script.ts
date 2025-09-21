@@ -11,10 +11,20 @@ type Todo={
 let todos:Todo[]=[];
 let doneTasks:Todo[]=[];
 
-const renderTask=():void=>{
-    todoList.innerHTML='';
-    doneList.innerHTML='';
-};
+const renderTask = (): void => {
+    todoList.innerHTML = '';
+    doneList.innerHTML = '';
+  
+    // 미완료 목록 그리기
+    todos.forEach(t => {
+      todoList.appendChild(createTodoElement(t, false));
+    });
+  
+    // 완료 목록 그리기
+    doneTasks.forEach(d => {
+      doneList.appendChild(createTodoElement(d, true));
+    });
+  };
 
 const getTodoText=():string=>{
     return todoInput.value.trim();
