@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input id="textInput" placeholder="아무거나 입력" />
+
+    <script>
+      const input = document.querySelector("#textInput");
+
+      input.addEventListener("keydown", (e) => {
+        console.log(`키를 눌렀어요: ${e.key}`);
+      });
+    </script>
+  </body>
+</html>
