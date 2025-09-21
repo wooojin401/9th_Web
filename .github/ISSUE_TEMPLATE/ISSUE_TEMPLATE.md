@@ -1,8 +1,8 @@
 ---
 name: 워크북 이슈 생성 템플릿
 about: 해당 이슈 생성 템플릿을 사용하여 워크북 이슈를 생성합니다.
-title: "Chapter00_워크북 제목"
-labels: ""
+title: "[0주차/표표]워크북 제출합니다."
+labels: ["chapter00", "keyword","mission","practice"]
 assignees: sunnyinha
 ---
 
@@ -10,7 +10,7 @@ assignees: sunnyinha
 
 ### 📚 워크북
 
-> 워크북 주소를 입력해 주세요.
+> https://www.notion.so/makeus-challenge/Chapter-00-HandBook-26db57f4596b80ad9d4ff518c9fb938b
 
 ### ✨ 이슈 내용
 
