@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>공 튀기기 애니메이션</title>
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            position: relative;
+            width: 200px;
+            height: 300px;
+        }
+
+        .circle {
+            position: absolute;
+            bottom: 0;
+            width: 80px;
+            height: 80px;
+            background-color: blueviolet;
+            border-radius: 50%;
+            animation: bounce 2.5s infinite;
+        }
+
+        @keyframes bounce {
+            0% {
+                transform: translateY(0) scaleX(1.1) scaleY(0.9);
+                animation-timing-function: cubic-bezier(0.55, 0.06, 0.68, 0.19);
+            }
+
+            50% {
+                transform: translateY(-200px) scaleX(0.95) scaleY(1.05);
+                animation-timing-function: cubic-bezier(0.27, 0.84, 0.44, 1);
+            }
+
+            100% {
+                transform: translateY(0) scaleX(1.1) scaleY(0.9);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="circle"></div>
+    </div>
+</body>
+
+</html>

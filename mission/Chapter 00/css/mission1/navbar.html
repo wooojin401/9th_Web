@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>BEM Responsive Navbar + Sidebar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="navbar.css">
+</head>
+<body>
+  <nav class="nav" aria-label="주 메뉴">
+    <ul class="nav__menu">
+      <li class="nav__item">
+        <button class="nav__button nav__button--icon" data-path="/" aria-label="홈">
+          <svg class="nav__icon" width="20" height="20" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"
+               xmlns="http://www.w3.org/2000/svg">
+            <path stroke="white" stroke-linecap="round" stroke-linejoin="round"
+                  d="M15.362 5.214A8.252 8.252 0 0 1 12 21 8.25 8.25 0 0 1 6.038 7.047 8.287 8.287 0 0 0 9 9.601a8.983 8.983 0 0 1 3.361-6.867 8.21 8.21 0 0 0 3 2.48Z"></path>
+            <path stroke="white" stroke-linecap="round" stroke-linejoin="round"
+                  d="M12 18a3.75 3.75 0 0 0 .495-7.468 5.99 5.99 0 0 0-1.925 3.547 5.975 5.975 0 0 1-2.133-1.001A3.75 3.75 0 0 0 12 18Z"></path>
+          </svg>
+        </button>
+      </li>
+      <li class="nav__item"><button class="nav__button" data-path="/projects">Projects</button></li>
+      <li class="nav__item"><button class="nav__button" data-path="/members">Members</button></li>
+      <li class="nav__item"><button class="nav__button" data-path="/notice">FAQ</button></li>
+    </ul>
+  </nav>
+
+  <button class="nav__hamburger" id="navHamburger" aria-label="메뉴 열기" aria-controls="sidebar" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+
+  <div class="nav__overlay" id="navOverlay" aria-hidden="true"></div>
+
+  <nav id="sidebar" class="sidebar" aria-label="Main navigation" aria-hidden="true">
+    <button class="sidebar__close" id="sidebarClose" aria-label="메뉴 닫기">&times;</button>
+    <div class="sidebar__inner">
+      <ul class="sidebar__menu">
+        <li class="sidebar__item"><a href="/" class="sidebar__link" data-path="/"><span class="sidebar__label">Home</span></a></li>
+        <li class="sidebar__item"><a href="/projects" class="sidebar__link" data-path="/projects"><span class="sidebar__label">Projects</span></a></li>
+        <li class="sidebar__item"><a href="/members" class="sidebar__link" data-path="/members"><span class="sidebar__label">Members</span></a></li>
+        <li class="sidebar__item"><a href="/notice" class="sidebar__link" data-path="/notice"><span class="sidebar__label">FAQ</span></a></li>
+      </ul>
+      <footer class="sidebar__footer">
+        <p>© SMUMC 2025.</p>
+      </footer>
+    </div>
+  </nav>
+  <script src="navbar.js"></script>
+</body>
+</html>
