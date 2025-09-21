@@ -97,7 +97,7 @@
 
           const btn = document.createElement("button");
           btn.textContent = "완료";
-          btn.onclick = () => completeTodo(btn);
+          btn.addEventListener("click", () => completeTodo(btn));
 
           li.appendChild(btn);
 
