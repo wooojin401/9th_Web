@@ -18,6 +18,7 @@ const getTodoText = (): string => {
     return todoInput.value.trim();
 }
 
+
 //할일 추가 처리함수
 const addTodo = (text: string): void => {
     todos.push({ id: Date.now(), text });
@@ -28,7 +29,7 @@ const addTodo = (text: string): void => {
 
 //할일 상태 변경(완료로 이동)
 const completeTodo = (todo: Todo): void => {
-    todos  = todos.filter((t) => t.id !== todo.id);
+    todos  = todos.filter((t) : boolean => t.id !== todo.id);
     doneTasks.push(todo);
     console.log("완료로 이동:", todo);
     renderTasks();
