@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bouncing Circle Animation</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0;
+      overflow: hidden; /* Prevents scrollbars from appearing */
+    }
+
+    .circle {
+      width: 100px;
+      height: 100px;
+      background-color: #4b0082; /* Deep purple color */
+      border-radius: 50%; /* Creates a perfect circle */
+
+      /* Animation Shorthand:
+         - bounce: name of the animation
+         - 1s: duration
+         - ease-in-out: timing function
+         - infinite: repeats forever
+         - alternate: reverses direction on each cycle
+      */
+      animation: bounce 1s ease-in-out infinite alternate;
+    }
+
+    /* Keyframes define the animation stages */
+    @keyframes bounce {
+      0% {
+        transform: translateY(0); /* Starting position (at the center) */
+      }
+      100% {
+        transform: translateY(-100px); /* Ending position (moves up) */
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="circle"></div>
+</body>
+</html>
