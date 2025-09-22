@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Todo List</title>
+  <style>
+    /* 전체 레이아웃 */
+/* 공통 레이아웃 */
+body {
+  background-color: #f3f6fb;
+  text-align: center;
+  padding: 40px;
+}
+
+/* 입력창 */
+#todo-input {
+  width: 50%;
+  padding: 10px;
+  margin: 20px 0;
+  border: 2px solid #4a6fa5;
+  border-radius: 5px;
+}
+
+/* 해야 할 일 / 해낸 일 구역 */
+.todo-section, .done-section {
+  display: inline-block;
+  vertical-align: top;
+  width: 250px;
+  margin: 0 20px;
+  text-align: left;
+}
+
+/* 섹션 제목 */
+section h2 {
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+}
+
+  </style>
+</head>
+<h1>UMC Study Plan</h1>
+<input id="todo-input" type="text" placeholder="할 일을 입력하세요" />
+
+<div class="list-container">
+  <section class="todo-section">
+    <h2>해야 할 일</h2>
+    <ul id="todo-list"></ul>
+  </section>
+
+  <section class="done-section">
+    <h2>해낸 일</h2>
+    <ul id="done-list"></ul>
+  </section>
+</div>
+
+
+
+  <script>
+    const input = document.getElementById('todo-input');
+    const todoList = document.getElementById('todo-list');
+    const doneList = document.getElementById('done-list');
+
+    // 할 일 추가
+    input.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' && input.value.trim() !== '') {
+        addTodo(input.value.trim());
+        input.value = '';
+      }
+    });
+
+    function addTodo(text) {
+      const li = document.createElement('li');
+      li.textContent = text;
+
+      const completeBtn = document.createElement('button');
+      completeBtn.textContent = '완료';
+      completeBtn.onclick = () => {
+        li.classList.add('done');
+        doneList.appendChild(li);
+        completeBtn.remove();
+      };
+
+      const deleteBtn = document.createElement('button');
+      deleteBtn.textContent = '삭제';
+      deleteBtn.onclick = () => li.remove();
+
+      li.appendChild(completeBtn);
+      li.appendChild(deleteBtn);
+      todoList.appendChild(li);
+    }
+  </script>
+</body>
+</html>
