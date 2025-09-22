@@ -108,3 +108,22 @@
 .container__item--button:hover {
     border: 1px solid red;
 }
+
+.container__form--input.error {
+    border: 2px solid red; 
+    animation: shake 0.3s; 
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px);
+    }
+    
+    75% {
+        transform: translateX(5px);
+    }
+}
