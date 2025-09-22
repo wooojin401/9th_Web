@@ -3,11 +3,22 @@ const todoInput = document.getElementById('todo-input');
 const todoForm = document.getElementById('todo-form');
 const todoList = document.getElementById('todo-list');
 const doneList = document.getElementById('done-list');
-
 let todos = [];
-let doneTodos = [];
 let doneTasks = [];
-
+const getTodoText = () => {
+    return todoInput.value.trim();
+};
+const addTodo = (text) => {
+    todos.push({ id: Date.now(), text });
+    todoInput.value = '';
+    renderTasks();
+};
+const completeTodo = (todo) => {
+    todos = todos.filter((t) => t.id !== todo.id);
+    doneTasks.push(todo);
+    console.log("완료로 이동:", todo);
+    renderTasks();
+};
 const renderTasks = () => {
     todoList.innerHTML = '';
     doneList.innerHTML = '';
@@ -19,19 +30,6 @@ const renderTasks = () => {
         const li = createTodoElement(todo, true);
         doneList.appendChild(li);
     });
-};
-const getTodoText = () => {
-    return todoInput.value.trim();
-};
-const addTodo = (text) => {
-    todos.push({ id: Date.now(), text });
-    todoInput.value = '';
-    renderTasks();
-};
-const completeTodo = (todo) => {
-    todos = todos.filter((t) => t.id !== todo.id);
-    doneTodos.push(todo);
-    renderTasks();
 };
 const deleteTodo = (todo) => {
     doneTasks = doneTasks.filter((t) => t.id !== todo.id);
