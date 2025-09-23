@@ -1,11 +1,20 @@
 import { useState, type FormEvent, type ChangeEvent } from "react";
-import type { Task } from "./types/Task";
+import { TodoProvider } from "./context/TodoContext";
 import TodoList from "./components/TodoList";
+import { useTodo } from "./hooks/useTodo";
+
 
 function App() {
+  return (
+    <TodoProvider>
+      <Main />
+    </TodoProvider>
+  );
+}
+
+function Main() {
   const [input, setInput] = useState("");
-  const [todos, setTodos] = useState<Task[]>([]);
-  const [doneTasks, setDoneTasks] = useState<Task[]>([]);
+  const { addTodo } = useTodo();
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
@@ -15,17 +24,8 @@ function App() {
     e.preventDefault();
     const text = input.trim();
     if (!text) return;
-    setTodos([...todos, { id: Date.now(), text }]);
+    addTodo(text);
     setInput("");
-  };
-
-  const handleComplete = (task: Task) => {
-    setTodos(todos.filter((t) => t.id !== task.id));
-    setDoneTasks([...doneTasks, task]);
-  };
-
-  const handleDelete = (task: Task) => {
-    setDoneTasks(doneTasks.filter((t) => t.id !== task.id));
   };
 
   return (
@@ -49,20 +49,8 @@ function App() {
           </button>
         </form>
         <div className="flex justify-between gap-5">
-          <TodoList
-            title="할 일"
-            tasks={todos}
-            onAction={handleComplete}
-            actionLabel="완료"
-            actionColor="green"
-          />
-          <TodoList
-            title="완료"
-            tasks={doneTasks}
-            onAction={handleDelete}
-            actionLabel="삭제"
-            actionColor="red"
-          />
+          <TodoList type="todo" />
+          <TodoList type="done" />
         </div>
       </div>
     </div>
