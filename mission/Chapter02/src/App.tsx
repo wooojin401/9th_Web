@@ -1,9 +1,6 @@
-import { useState, type ChangeEvent, type FormEvent } from "react";
-
-interface Task {
-  id: number;
-  text: string;
-}
+import { useState, type FormEvent, type ChangeEvent } from "react";
+import type { Task } from "./types/Task";
+import TodoList from "./components/TodoList";
 
 function App() {
   const [input, setInput] = useState("");
@@ -35,11 +32,7 @@ function App() {
     <div className="min-h-screen flex items-center justify-center bg-[#eef2f3]">
       <div className="bg-white p-6 rounded-xl shadow-lg w-[350px] text-center">
         <h1 className="text-2xl mb-4 font-bold">YONG TODO</h1>
-        <form
-          className="flex gap-2 mb-5"
-          onSubmit={handleAddTodo}
-          autoComplete="off"
-        >
+        <form className="flex gap-2 mb-5" onSubmit={handleAddTodo} autoComplete="off">
           <input
             type="text"
             className="flex-1 p-2 border border-gray-300 rounded-md text-sm"
@@ -56,48 +49,20 @@ function App() {
           </button>
         </form>
         <div className="flex justify-between gap-5">
-          <div className="w-full text-left">
-            <h2 className="text-lg mb-2 flex justify-center">할 일</h2>
-            <ul className="list-none p-0 m-0">
-              {todos.map((task) => (
-                <li
-                  key={task.id}
-                  className="flex justify-between items-center p-2 mb-1 bg-gray-100 border-b border-gray-200 rounded-md w-full"
-                >
-                  <span className="flex-1 block whitespace-nowrap overflow-hidden text-ellipsis">
-                    {task.text}
-                  </span>
-                  <button
-                    className="bg-green-600 hover:bg-green-700 text-white px-2 py-1 rounded-md text-xs ml-2 transition-colors"
-                    onClick={() => handleComplete(task)}
-                  >
-                    완료
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="w-full text-left">
-            <h2 className="text-lg mb-2 flex justify-center">완료</h2>
-            <ul className="list-none p-0 m-0">
-              {doneTasks.map((task) => (
-                <li
-                  key={task.id}
-                  className="flex justify-between items-center p-2 mb-1 bg-gray-100 border-b border-gray-200 rounded-md w-full"
-                >
-                  <span className="flex-1 block whitespace-nowrap overflow-hidden text-ellipsis">
-                    {task.text}
-                  </span>
-                  <button
-                    className="bg-red-600 hover:bg-red-700 text-white px-2 py-1 rounded-md text-xs ml-2 transition-colors"
-                    onClick={() => handleDelete(task)}
-                  >
-                    삭제
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <TodoList
+            title="할 일"
+            tasks={todos}
+            onAction={handleComplete}
+            actionLabel="완료"
+            actionColor="green"
+          />
+          <TodoList
+            title="완료"
+            tasks={doneTasks}
+            onAction={handleDelete}
+            actionLabel="삭제"
+            actionColor="red"
+          />
         </div>
       </div>
     </div>
