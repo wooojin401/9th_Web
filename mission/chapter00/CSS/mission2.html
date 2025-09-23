@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width" initial-scale="1.0">
+        <title>mission2</title>
+        <style>
+            *{box-sizing:border-box}
+            html,body{height:100%}
+            body{margin:0;
+                 background:white; 
+                 font-family:sans-serif;
+                 color:white;
+                }
+                
+            .layout{
+                min-height:100vh;
+                display:grid;
+                grid-template-rows: 90px 1fr 38vh 100px;
+            }
+            .layout_top{display:flex;}
+            .layout_header{
+                flex:0 0 38%;
+                background:navy;
+            }
+            .layout_menu{
+                flex:1; 
+                background:crimson;
+            }
+            .layout_hero{
+                background:dodgerblue;
+            }
+            .layout_content{
+                display:grid;
+                grid-template-columns:1.6fr 0.35fr 1fr;
+            }
+            .layout_main{
+                background:midnightblue;
+            }
+            .layout_gap{ 
+                background:white; 
+            }
+            .layout_sidebar{ 
+                display:grid; 
+                grid-template-rows: 1fr 1fr; }
+            .layout_image{
+                background:lightcyan;
+                color:black;
+            }
+            .layout_extra{
+                background:mediumseagreen;
+                color:black;
+            }
+            .u-center{
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                font-size:32px; 
+            }
+            .layout_banner{ 
+                background:gold; 
+                color:black; 
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="layout">
+            <div class="layout_top">
+                <div class="layout_header u-center">HEADER</div>
+                <div class="layout_menu u-center">MENU</div>  
+             
+        </div>  
+        <section class="layout_hero u-center">HERO</section>
+        <section class="layout_content">
+            <main class="layout_main u-center">MAIN</main>
+            <div class="layout_gap"></div>
+            <article class="layout_sidebar">
+                <div class="layout_image u-center">IMAGE</div>
+                <div class="layout_extra u-center">EXTRA</div>
+            </article>
+        </section>
+
+        <footer class="layout_banner u-center" >BANNER</footer>
+    </div>   
+    </body>
+</html>

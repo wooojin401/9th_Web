@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Navbar</title>
+<style>
+  body {
+    margin: 0;
+    background: black;
+    font-family: sans-serif;
+    color: #fff;
+  }
+
+  .navbar {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+    position: relative;
+  }
+
+  .navbar__pill {
+    background: rgb(17, 17, 58);
+    border-radius: 9999px;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    position: relative;
+  }
+
+  /* 공통 버튼 스타일 */
+  .nav-btn {
+    position: relative;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 9999px;
+    z-index: 1;
+  }
+
+  /* input 숨기기 */
+  input[type="radio"] {
+    display: none;
+  }
+
+  /* highlight (하나만 두고 이동) */
+  .highlight {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    border-radius: 9999px;
+    background: green;
+    z-index: 0;
+    transition: transform 0.3s ease, width 0.3s ease;
+  }
+
+  #tab-logo:checked ~ .highlight {
+    transform: translateX(0);
+    width: 100px;
+  }
+  #tab-projects:checked ~ .highlight {
+    transform: translateX(100px);
+    width: 120px;
+  }
+  #tab-members:checked ~ .highlight {
+    transform: translateX(230px);
+    width: 140px;
+  }
+  #tab-faq:checked ~ .highlight {
+    transform: translateX(380px);
+    width: 100px;
+  }
+
+  /* 햄버거 메뉴 버튼 (기본적으로 숨김) */
+  .hamburger {
+    display: none;
+    position: absolute;
+    top: 50%;
+    right: 30px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    z-index: 1000;
+  }
+
+  .hamburger span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background: #fff;
+    margin: 5px 0;
+    transition: 0.3s;
+  }
+
+  /* 모바일 화면에서 햄버거 메뉴 표시 */
+  @media (max-width: 768px) {
+    .navbar {
+      justify-content: flex-end;
+      padding: 20px 30px;
+    }
+
+    .navbar__pill {
+      display: none;
+    }
+
+    .hamburger {
+      display: block;
+    }
+
+    /* 햄버거 메뉴가 열렸을 때 */
+    .menu-open .navbar__pill {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 70px;
+      right: 30px;
+      background: rgb(17, 17, 58);
+      border-radius: 20px;
+      padding: 20px;
+      gap: 15px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      min-width: 150px;
+    }
+
+    .menu-open .highlight {
+      display: none;
+    }
+
+    .menu-open .nav-btn {
+      text-align: center;
+      padding: 12px 20px;
+      border-radius: 10px;
+      transition: background 0.2s ease;
+    }
+
+    .menu-open .nav-btn:hover {
+      background: black;
+    }
+
+  }
+</style>
+</head>
+<body>
+
+  <nav class="navbar" id="navbar">
+    <!-- 햄버거 메뉴 버튼 -->
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <div class="navbar__pill">
+      <!-- radio inputs -->
+      <input type="radio" name="tab" id="tab-logo" checked>
+      <label for="tab-logo" class="nav-btn">🔥</label>
+
+      <input type="radio" name="tab" id="tab-projects">
+      <label for="tab-projects" class="nav-btn">Projects</label>
+
+      <input type="radio" name="tab" id="tab-members">
+      <label for="tab-members" class="nav-btn">Members</label>
+
+      <input type="radio" name="tab" id="tab-faq">
+      <label for="tab-faq" class="nav-btn">FAQ</label>
+
+      <!-- highlight -->
+      <div class="highlight"></div>
+    </div>
+  </nav>
+
+  <script>
+    function toggleMenu() {
+      const navbar = document.getElementById('navbar');
+      navbar.classList.toggle('menu-open');
+    }
+
+    // 메뉴 아이템 클릭 시 모바일에서 메뉴 닫기
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (window.innerWidth <= 768) {
+          document.getElementById('navbar').classList.remove('menu-open');
+        }
+      });
+    });
+
+    // 창 크기 변경 시 메뉴 상태 초기화
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 768) {
+        document.getElementById('navbar').classList.remove('menu-open');
+      }
+    });
+  </script>
+
+</body>
+</html>
