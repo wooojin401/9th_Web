@@ -1,18 +1,116 @@
-- 타입 스크립트에만 존재하는 타입 🍠
-    - any 🍠
-        - 모든 타입을 허용하는 특수 타입
-        - 타입 검사를 하지 않기 때문에 안전성이 떨어짐
-        - 기존 자바스크립트 코드를 빠르게 마이그레이션할 때는 편리하지만, 지양하는 것이 좋음
-        - 사실상 “타입스크립트의 보호 장치 해제”라고 보면 됨
-    - unknown 🍠
-        - `any` 와 비슷하게 모든 값을 할당 가능하지만 사용하기 전에 타입 검사를 반드시 해야하는 `안전한 any`
-        - 직접 연산이나 속성 접근은 불가능하고, 조건문,타입 좁히기(type narrowing) 후 사용해야 함
-    - void 🍠
-        - 반환값이 없음을 의미
-        - 주로 함수의 리턴 타입으로 사용됨
-        - 자바스크립트에서 `reuturn`이 없는 함수는 `undefined`를 반환하지만, 타입스크립트에선 이를 `void`로 표시해 “사용하지 않는다”는 의미를 줌
-    - never 🍠
-        - 절대로 도달할 수 없는 값을 나타냄
-        - 예 ) 함수가 영원히 끝나지 않거나, 항상 오류를 던지는 경우
-        - 모든 타입의 서브타입이지만, 어떤 값도 `never`에 할당할 수 없음
-        - 주로 타입 안전성을 높이는 역할에 사용됨
+그러면, 위와 같이 **여러 개의 태그를 동시에 반환하려고 할 때**는 어떻게 해야 할까요?
+
+- 답변 🍠
+    
+    ```jsx
+    function App() {
+      return (
+        <>
+          <strong>상명대학교</strong>
+          <p>매튜/김용민</p>
+        </>
+      )
+    }
+    export default App
+    
+    ```
+    
+    <aside>
+    🍠
+    
+    이유: 
+    
+    - JSX 문법 규칙상, **컴포넌트는 하나의 부모 노드만 반환**할 수 있어요.
+    - 여러 요소를 나란히 반환하고 싶을 때는 `<div>...</div>` 같은 태그로 감싸거나, 불필요한 DOM을 만들고 싶지 않다면 **React.Fragment(`<> ... </>`)**를 사용해요.
+    - `Fragment`는 화면에 추가적인 DOM을 만들지 않고 여러 요소를 묶어주는 역할을 합니다.
+    </aside>
+
+    여러분들이, 직접 한번 구조분해 할당을 활용해서 어떻게 깔끔하게 코드를 작성할 수 있을지 고민해보세요!! 
+저는 두가지 방식이 크게 떠오르는데요, 여러분들이 생각하는 방식으로 한번 해결해보세요! 저는 해설로 한번 저의 생각을 공유드릴테니 여러분들도 한번 직접 고민해보세요
+
+- 구조분해 할당 활용
+    
+    ### 함수 매개변수에서 바로 분해
+    
+    ```tsx
+    const List = ({ tech }) => {
+      return (
+        <li>
+          {tech}
+        </li>
+      )
+    }
+    
+    export default List
+    ```
+    
+    props 중 필요한 것만 매개변수에서 바로 꺼낼 수 있다
+    
+
+    - **위의 영상을 보고 Lazy Initialization(게으른 초기화)**에 대해 설명해주세요 🍠
+    
+    컴포넌트가 렌더링될 때 초기 state값을 딱 한번만 계산하게 하는 방법이다.
+    
+    useState에 값 대신 함수를 넘기면, 그 함수는 첫 렌더 때만 실행되고 이후 재랜더에서는 다시 돌지 않는다.
+    
+- **App.tsx** 파일에 직접 카운터가 1씩 증가, 1씩 감소하는 기능을 만들어주세요 🍠
+    - 직접 작성한 코드 **App.tsx** 파일을 올려주세요!
+        
+        ```tsx
+        import './App.css'
+        import { useState } from 'react'
+        
+        export default function App() {
+          const [count, setCount] = useState(0)
+          return (
+            <div>
+              <button onClick={() => setCount(c => c - 1)}>-1</button>
+              <span style={{ margin: '0 10px' }}>{count}</span>
+              <button onClick={() => setCount(c => c + 1)}>+1</button>
+            </div>
+          )
+        }
+        ```
+        
+    -
+    - 영상을 보고 실습을 하면서 몰랐던 개념들을 토글을 열어 정리해주세요 🍠
+    
+    ### useState 핵심 + 안전한 업데이트
+    
+    - 기본형
+        
+        ```tsx
+        const [count, setCount] = useState(0)
+        
+        ```
+        
+    - **값 기반**: 같은 렌더에서 오래된 값 잡을 수 있음
+        
+        ```tsx
+        setCount(count + 1)
+        
+        ```
+        
+    - **함수형 업데이트**: 항상 직전 상태 기준으로 정확
+        
+        ```tsx
+        setCount(prev => prev + 1)
+        
+        ```
+        
+        ### Lazy Initialization(지연 초기화)
+        
+    
+    - 렌더 때마다 초기 계산 실행됨
+        
+        ```tsx
+        const [v] = useState(heavyWork())    // 매 렌더 실행
+        
+        ```
+        
+    - **최초 한 번만** 초기 계산 실행
+        
+        ```tsx
+        const [v] = useState(() => heavyWork()) // 또는 useState(heavyWork)
+        
+        ```
