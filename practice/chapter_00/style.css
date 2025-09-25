@@ -1,0 +1,39 @@
+* { box-sizing: border-box; }
+body {
+    font-family: system-ui, -apple-system, 'Noto Sans KR', sans-serif;
+    margin: 24px;
+    line-height: 1.6;
+}
+.stage {
+    border: 1px dashed gray;
+    padding: 12px;
+    margin-bottom: 20px;
+    min-height: 96px;
+}
+.box {
+    border: 2px solid black;
+    padding: 8px;
+    text-align: center;
+    font-weight: bold;
+}
+/* block */
+.box.block {
+    display: block;
+    width: 160px;
+    height: 60px;
+    margin: 6px 0;
+}
+/* inline */
+.box.inline {
+    display: inline;
+    width: 160px;   /* 적용 안됨 */
+    height: 60px;   /* 적용 안됨 */
+    margin: 0 6px;
+}
+/* inline-block */
+.box.inlineblock {
+    display: inline-block;
+    width: 160px;
+    height: 60px;
+    margin: 6px;
+}

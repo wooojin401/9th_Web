@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transition with Transform</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0;
+    }
+
+    /* 모든 다이아몬드에 동일한 스타일 적용 */
+    .diamond {
+      width: 100px;
+      height: 100px;
+      background-color: #ffc0cb; /* Pink color */
+      transform: rotate(45deg); /* Rotate to form a diamond */
+      margin: 20px 0;
+      border-radius: 5px;
+      /* 모든 다이아몬드에 transition 효과 추가 */
+      transition: background-color 0.5s ease-in-out, transform 0.5s ease-in-out;
+    }
+
+    /* 모든 다이아몬드에 hover 효과 추가 */
+    .diamond:hover {
+      background-color: #4b0082; /* Deep purple color */
+      transform: rotate(45deg) scale(1.2); /* Rotate and slightly enlarge on hover */
+    }
+  </style>
+</head>
+<body>
+<div class="diamond"></div>
+<div class="diamond"></div>
+<div class="diamond"></div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>block vs inline vs inline-block</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<header>
+  <h1>display: block / inline / inline-block</h1>
+</header>
+
+<main>
+  <section>
+    <h2>block</h2>
+    <div class="stage">
+      <div class="box block">A</div>
+      <div class="box block">B</div>
+      <div class="box block">C</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>inline</h2>
+    <div class="stage">
+      <span class="box inline">A</span>
+      <span class="box inline">B</span>
+      <span class="box inline">C</span>
+    </div>
+  </section>
+
+  <section>
+    <h2>inline-block</h2>
+    <div class="stage">
+      <div class="box inlineblock">B</div>
+      <div class="box inlineblock">C</div>
+    </div>
+  </section>
+</main>
+</body>
+</html>
