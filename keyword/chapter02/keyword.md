@@ -114,3 +114,46 @@
         const [v] = useState(() => heavyWork()) // 또는 useState(heavyWork)
         
         ```
+
+        ## `useState`를 선택할 때
+
+- 상태가 단순하고 **불린, 문자열, 숫자, 단일 객체/배열** 정도일 때
+- 상태 변경 로직이 **한두 줄 정도로 단순할 때**
+- UI에 직접적으로 연결된 값이어서 빠르게 관리하고 싶을 때
+- 컴포넌트의 규모가 작아서 복잡한 흐름을 고려할 필요가 없을 때
+
+```tsx
+const [count, setCount] = useState(0);
+
+function increase() {
+  setCount(count + 1);
+}
+```
+
+---
+
+## `useReducer`를 선택할 때
+
+- 상태 값이 **여러 개** 얽혀 있어서 함께 관리해야 할 때
+- `if/else`나 `setState` 중첩이 늘어나서 코드 가독성이 떨어질 때
+- 상태 업데이트 로직을 한 곳에 모아두고 싶을 때 → 유지보수성 ↑
+- 팀 프로젝트에서 **명확한 액션 정의**로 협업 가독성을 높이고 싶을 때
+
+```tsx
+type State = { count: number };
+type Action = { type: 'INCREMENT' } | { type: 'DECREMENT' };
+
+function reducer(state: State, action: Action): State {
+  switch (action.type) {
+    case 'INCREMENT': return { count: state.count + 1 };
+    case 'DECREMENT': return { count: state.count - 1 };
+    default: return state;
+  }
+}
+
+const [state, dispatch] = useReducer(reducer, { count: 0 });
+```
+
+---
+
+##
