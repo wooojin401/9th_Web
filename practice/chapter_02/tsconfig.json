@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+      "target": "ESNext",
+      "module": "ESNext",            // ✅ CJS 말고 ESM
+      "moduleResolution": "node",    // 또는 "bundler" (Vite면 bundler도 OK)
+      "jsx": "react-jsx",
+      "strict": true,
+      "esModuleInterop": true,
+      "skipLibCheck": true,
+      "forceConsistentCasingInFileNames": true
+      // ⛔ 아래 옵션이 있으면 제거하세요
+      // "verbatimModuleSyntax": true
+    }
+  }
+  
