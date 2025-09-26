@@ -7,7 +7,7 @@ import DoneList from "./components/DoneList";
 function App() {
   return (
     <TodoProvider>
-      <h1>YONG TODO</h1>
+      <h1>TODO</h1>
       <InputForm />
       <TodoList />
       <DoneList />
