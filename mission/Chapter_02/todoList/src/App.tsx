@@ -1,13 +1,15 @@
 import { useState } from 'react'
 import './App.css'
 
+type Todo = {
+  id: number;
+  text: string;
+}
+
+
 function App() {
 
-  type Todo = {
-    id: number;
-    text: string;
-  }
-
+ 
 
   const [todos, setTodos] = useState<Todo[]>([]);
   const [doneTasks, setDoneTasks] = useState<Todo[]>([]);
