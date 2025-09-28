@@ -1,9 +1,10 @@
 import TodoForm from "./TodoForm";
 import TodoList from "./TodoList";
-import { useTodo } from "../context/TodoContext";
+import { useTodoDispatch, useTodoState } from "../context/TodoContext";
 
 const Todo = () => {
-  const { todos, completeTodo, doneTodos, deleteTodo } = useTodo();
+  const { todos, doneTodos } = useTodoState();
+  const { completeTodo, deleteTodo } = useTodoDispatch();
 
   return (
     <div className="todo-container">

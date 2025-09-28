@@ -1,32 +1,23 @@
 import { useState, type FormEvent } from "react";
 import type { TTodo } from "../types/todo";
+import { useTodoState, useTodoDispatch } from "../context/TodoContext";
 
-const TodoBefore = () => {
-  const [todos, setTodos] = useState<TTodo[]>([]);
-  const [doneTodos, setDoneTodos] = useState<TTodo[]>([]);
+const Todo = () => {
   const [input, setInput] = useState<string>("");
+
+  const { todos, doneTodos } = useTodoState();
+
+  const { addTodo, completeTodo, deleteTodo } = useTodoDispatch();
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const text = input.trim();
-
     if (text) {
-      const newTodo: TTodo = { id: Date.now(), text };
-      setTodos((prevTodos) => [...prevTodos, newTodo]);
+      addTodo(text);
       setInput("");
     }
   };
 
-  const completeTodo = (todo: TTodo) => {
-    setTodos((prevTodos) => prevTodos.filter((t) => t.id !== todo.id));
-    setDoneTodos((prevDoneTodos) => [...prevDoneTodos, todo]);
-  };
-
-  const deleteTodo = (todo: TTodo) => {
-    setDoneTodos((prevDoneTodos) =>
-      prevDoneTodos.filter((t) => t.id !== todo.id)
-    );
-  };
   return (
     <div className="todo-container">
       <h1 className="todo-container__header">YONG TODO</h1>
@@ -38,11 +29,12 @@ const TodoBefore = () => {
           className="todo-container__input"
           placeholder="할 일 입력"
           required
-        ></input>
+        />
         <button type="submit" className="todo-container__button">
           할 일 추가
         </button>
       </form>
+
       <div className="render-container">
         <div className="render-container__section">
           <h2 className="render-container__title">할 일</h2>
@@ -61,6 +53,7 @@ const TodoBefore = () => {
             ))}
           </ul>
         </div>
+
         <div className="render-container__section">
           <h2 className="render-container__title">완료</h2>
           <ul id="todo-list" className="render-container__list">
@@ -83,4 +76,4 @@ const TodoBefore = () => {
   );
 };
 
-export default TodoBefore;
+export default Todo;

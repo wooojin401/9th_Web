@@ -6,15 +6,18 @@ import {
 } from "react";
 import type { TTodo } from "../types/todo";
 
-interface ITodoContext {
-  todos: TTodo[];
-  doneTodos: TTodo[];
-  addTodo: (text: string) => void;
-  completeTodo: (todo: TTodo) => void;
-  deleteTodo: (todo: TTodo) => void;
-}
+export const TodoStateContext = createContext<
+  { todos: TTodo[]; doneTodos: TTodo[] } | undefined
+>(undefined);
 
-export const TodoContext = createContext<ITodoContext | undefined>(undefined);
+export const TodoDispatchContext = createContext<
+  | {
+      addTodo: (text: string) => void;
+      completeTodo: (todo: TTodo) => void;
+      deleteTodo: (todo: TTodo) => void;
+    }
+  | undefined
+>(undefined);
 
 export const TodoProvider = ({ children }: PropsWithChildren) => {
   const [todos, setTodos] = useState<TTodo[]>([]);
@@ -37,21 +40,26 @@ export const TodoProvider = ({ children }: PropsWithChildren) => {
   };
 
   return (
-    <TodoContext.Provider
-      value={{ todos, doneTodos, addTodo, completeTodo, deleteTodo }}
-    >
-      {children}
-    </TodoContext.Provider>
+    <TodoStateContext.Provider value={{ todos, doneTodos }}>
+      <TodoDispatchContext.Provider
+        value={{ addTodo, completeTodo, deleteTodo }}
+      >
+        {children}
+      </TodoDispatchContext.Provider>
+    </TodoStateContext.Provider>
   );
 };
 
-export const useTodo = () => {
-  const context = useContext(TodoContext);
-  if (!context) {
-    throw new Error(
-      "useTodo를 사용하기 위해서는, 무조건 TodoProvider로 감싸야 합니다."
-    );
-  }
+export const useTodoState = () => {
+  const context = useContext(TodoStateContext);
+  if (!context)
+    throw new Error("useTodoState는 TodoProvider 안에서만 사용 가능합니다.");
+  return context;
+};
 
+export const useTodoDispatch = () => {
+  const context = useContext(TodoDispatchContext);
+  if (!context)
+    throw new Error("useTodoDispatch는 TodoProvider 안에서만 사용 가능합니다.");
   return context;
 };

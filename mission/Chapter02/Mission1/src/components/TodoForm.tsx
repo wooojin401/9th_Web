@@ -1,9 +1,10 @@
 import { useState, type FormEvent } from "react";
-import { useTodo } from "../context/TodoContext";
+import { useTodoDispatch } from "../context/TodoContext";
 
 const TodoForm = () => {
   const [input, setInput] = useState<string>("");
-  const { addTodo } = useTodo();
+  const { addTodo } = useTodoDispatch();
+
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const text = input.trim();
@@ -13,6 +14,7 @@ const TodoForm = () => {
       setInput("");
     }
   };
+
   return (
     <form className="todo-container__form" onSubmit={handleSubmit}>
       <input
@@ -22,7 +24,7 @@ const TodoForm = () => {
         className="todo-container__input"
         placeholder="할 일 입력"
         required
-      ></input>
+      />
       <button type="submit" className="todo-container__button">
         할 일 추가
       </button>
