@@ -1,9 +1,8 @@
-
-import DoneItem from "./DoneItem";
+import { ListItem } from "./ListItem";
 import { useTodo } from "./TodoContext";
 
 function DoneList() {
-    const { done } = useTodo();
+    const { done, removeDone } = useTodo();
 
     return (
         <section>
@@ -11,7 +10,7 @@ function DoneList() {
             <ul>
                 {done.length === 0 && <li className="text-sm text-pink-300"></li>}
                 {done.map((t) => (
-                <DoneItem key={t.id} todo={t} />
+                <ListItem key={t.id} todo={t} buttonText="삭제" onButtonClick={() => removeDone(t.id)} isDone={true} />
                 ))}
             </ul>
         </section>

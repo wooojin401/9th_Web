@@ -1,3 +1,4 @@
+/*
 import { useTodo } from "./TodoContext";
 
 function TodoItem({ todo }: { todo: { id: string; text: string } }) {
@@ -17,3 +18,4 @@ function TodoItem({ todo }: { todo: { id: string; text: string } }) {
 }
 
 export default TodoItem;
+*/
