@@ -8,9 +8,6 @@ type Todo = {
 
 
 function App() {
-
- 
-
   const [todos, setTodos] = useState<Todo[]>([]);
   const [doneTasks, setDoneTasks] = useState<Todo[]>([]);
   const [input, setInput] = useState("");
