@@ -9,8 +9,7 @@ interface ITodoContext{
     deleteTodo: (todo: TTodo) => void;
 }
 
-export const TodoContext = createContext<ITodoContext | undefined>
-(undefined);
+export const TodoContext = createContext<ITodoContext | undefined>(undefined);
 
 export const TodoProvider =({children}: PropsWithChildren)  => {
     const [todos, setTodos] = useState<TTodo[]>([
@@ -35,7 +34,7 @@ export const TodoProvider =({children}: PropsWithChildren)  => {
           return(
           <TodoContext.Provider value={{ todos, doneTodos, addTodo, completeTodo, deleteTodo }}>
             {children}   
-</TodoContext.Provider>
+          </TodoContext.Provider>
           );
 };
 
