@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+      "target": "ESNext",
+      "module": "ESNext", // CommonJS → ESNext로 변경
+      "moduleResolution": "Node",
+      "jsx": "react-jsx",
+      "esModuleInterop": true,
+      "skipLibCheck": true,
+      "forceConsistentCasingInFileNames": true,
+      "strict": true,
+      "verbatimModuleSyntax": false // 필요하다면 아예 false로 꺼버리기
+    }
+  }
