@@ -1,9 +1,9 @@
-import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useEffect, type ReactElement, useState } from "react";
-import { type MovieRes, type Movie } from "../types/Movie";
+import { type Movie } from "../types/Movie";
 import MovieCard from "../components/MovieCard";
 import LoadingSpinner from "../components/LoadingSpinner";
+import { getMovies, type MovieCategory } from "../api/movie";
 
 export default function MoviePage(): ReactElement {
     const [isPending, setIsPending] = useState<boolean>(false);
@@ -12,19 +12,16 @@ export default function MoviePage(): ReactElement {
     const [page, setPage] = useState<number>(1);
 
     const { category } = useParams<{
-        category: string;
+        category: MovieCategory;
     }>();
+    const safeCategory = typeof category === "string" ? category : "popular";
 
     useEffect((): void => {
         const fetchMovies = async (): Promise<void> => {
             setIsPending(true);
 
             try {
-                const { data } = await axios.get<MovieRes>(`https://api.themoviedb.org/3/movie/${category}?language=ko-KR&page=${page}`, {
-                    headers: {
-                        Authorization: `Bearer ${import.meta.env.VITE_TMDB_KEY}`
-                    }
-                });
+                const data = await getMovies({ category: safeCategory, page });
 
                 setMovies(data.results)
             } catch {
@@ -36,6 +33,10 @@ export default function MoviePage(): ReactElement {
 
         fetchMovies();
     }, [page, category]);
+
+    useEffect((): void => {
+        setPage(1);
+    }, [category])
 
     if (isError) {
         return (
