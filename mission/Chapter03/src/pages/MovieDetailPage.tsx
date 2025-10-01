@@ -2,6 +2,7 @@ import { useEffect, type ReactElement, useState } from "react";
 import { getCredits, getMovie } from "../api/movie";
 import { useParams } from "react-router-dom";
 import type { Credits, MovieDetails } from "../types/Movie";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 function formatYear(dateStr?: string): string {
     if (!dateStr) return "";
@@ -71,8 +72,8 @@ const MovieDetailPage = (): ReactElement => {
 
     if (isPending || !detail || !credits) {
         return (
-            <div className="p-6">
-                <span className="text-xl text-gray-500">로딩 중…</span>
+            <div className="flex item-center justify-center h-dvh">
+                <LoadingSpinner />
             </div>
         );
     }
@@ -80,7 +81,7 @@ const MovieDetailPage = (): ReactElement => {
     const posterUrl = buildImageUrl(detail.poster_path, "w500");
     const year = formatYear(detail.release_date);
     const runtimeText = formatRuntime(detail.runtime);
-    const rating = (Math.round((detail.vote_average ?? 0) * 10) / 10).toFixed(1); 
+    const rating = (Math.round((detail.vote_average ?? 0) * 10) / 10).toFixed(1);
     const title = detail.title;
     const tagline = detail.tagline ?? "";
     const overview = detail.overview ?? "줄거리 정보가 없습니다.";
