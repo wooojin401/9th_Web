@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <title>Minimal SPA</title>
+  <style>
+    nav a { margin-right: 12px; }
+    body { font-family: system-ui, sans-serif; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/">HOME</a>
+    <a href="/matthew">MATTHEW</a>
+    <a href="/aeong">AEONG</a>
+    <a href="/joy">JOY</a>
+    <a href="/not-found">NOT FOUND</a>
+  </nav>
+
+  <main id="app" style="margin-top:16px;"></main>
+
+  <script>
+    // 1) 경로 => HTML 매핑 테이블
+    const routes = {
+      "/": "<h1>Home</h1><p>여기는 홈이다.</p>",
+      "/matthew": "<h1>매튜 페이지</h1>",
+      "/aeong": "<h1>애옹 페이지</h1>",
+      "/joy": "<h1>조이 페이지</h1>",
+    };
+
+    // 2) 렌더 함수
+    function render(pathname) {
+      const view = routes[pathname] || "<h1>404</h1>";
+      document.getElementById("app").innerHTML = view;
+    }
+
+    // 3) 링크 클릭 가로채기 (전체 리로드 방지)
+    window.addEventListener("click", (e) => {
+      const a = e.target.closest("a");
+      if (!a) return;
+      if (a.origin !== location.origin) return; // 외부 링크는 통과
+      e.preventDefault();                       // 기본 동작(리로드) 막기
+      if (a.pathname === location.pathname) return;
+      history.pushState({}, "", a.pathname);    // 주소만 변경
+      render(location.pathname);                 // 화면 교체
+    });
+
+    // 4) 뒤/앞으로 가기(popstate) 대응
+    window.addEventListener("popstate", () => {
+      render(location.pathname);
+    });
+
+    // 5) 최초 로드 시 렌더
+    render(location.pathname);
+  </script>
+</body>
+</html>
