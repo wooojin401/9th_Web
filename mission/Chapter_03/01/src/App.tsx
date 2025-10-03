@@ -7,11 +7,10 @@ import NowPlaying from "./pages/NowPlay";
 import TopRated from "./pages/TopRated";
 import Upcoming from "./pages/Upcoming";
 
-const App: React.FC = () => {
+const App = () => {
   return (
     <Router>
       <Routes>
-        {/* RootLayout을 공통 레이아웃으로 사용 */}
         <Route path="/" element={<RootLayout />}>
           <Route index element={<Home />} />
           <Route path="popular" element={<Popular />} />
