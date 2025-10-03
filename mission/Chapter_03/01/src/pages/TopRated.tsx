@@ -1,6 +1,7 @@
 import  { useEffect, useState } from "react";
 import Pagination from "../components/Pagination";
 import { usePagination } from "../hooks/usePagination";
+import { Link } from "react-router-dom";
 
 type Movie = {
   id: number;
@@ -28,7 +29,7 @@ const TopRated = () => {
       setError(null); // 에러 초기화
       try {
         const response = await fetch(
-          `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=vote_average.desc&without_genres=99,10755&vote_count.gte=200`,
+          `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=ko-KR&page=${page}&sort_by=vote_average.desc&without_genres=99,10755&vote_count.gte=200`,
           {
             headers: {
               Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1ZDU1NzYxOWVkZDM2N2VlYTFhYTAzODhhY2Y2ZjcyNyIsIm5iZiI6MTc1OTM3OTQzNy45NjQsInN1YiI6IjY4ZGRmZmVkZWQ0OTZlODNmNTQwNWIyOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.46eqjVN2dAavrGgmju0sjR1nrEte9VX_whQLRXiMrII`, 
@@ -73,7 +74,8 @@ const TopRated = () => {
         // 데이터 렌더링
         <div className="grid grid-cols-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
           {movies.map((movie) => (
-           <div
+           <Link
+           to={`/movies/${movie.id}`} // 영화 상세 페이지로 이동하는 링크 추가
            key={movie.id}
            className="relative bg-white rounded-2xl shadow-md overflow-hidden w-48 mx-auto transform transition hover:scale-105 group"
          >
@@ -90,7 +92,7 @@ const TopRated = () => {
                {movie.overview}
              </p>
            </div>
-         </div>
+         </Link>
           ))}
         </div>
       )}

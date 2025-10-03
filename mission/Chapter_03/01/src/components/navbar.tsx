@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-const Navbar: React.FC = () => {
+const Navbar = () => {
   return (
     <nav className="bg-gray-800 text-white px-6 py-4 shadow-md">
       <div className="container mx-auto flex justify-between items-center">

@@ -6,6 +6,7 @@ import Popular from "./pages/Popular";
 import NowPlaying from "./pages/NowPlay";
 import TopRated from "./pages/TopRated";
 import Upcoming from "./pages/Upcoming";
+import MovieDetails from "./pages/MovieDetails"; // 영화 상세 페이지 컴포넌트
 
 const App = () => {
   return (
@@ -17,6 +18,8 @@ const App = () => {
           <Route path="now-playing" element={<NowPlaying />} />
           <Route path="top-rated" element={<TopRated />} />
           <Route path="upcoming" element={<Upcoming />} />
+          <Route path="/movies/:movieId" element={<MovieDetails />} /> {/* 동적 라우트 */}
+
         </Route>
       </Routes>
     </Router>
