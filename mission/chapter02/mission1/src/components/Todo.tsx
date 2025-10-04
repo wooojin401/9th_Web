@@ -2,8 +2,9 @@
 import TodoForm from "./TodoForm";
 import TodoList from "./TodoList";
 import { useTodo } from "../context/TodoContext";
+import type { JSX } from "react";
 
-const Todo =(): any =>{
+const Todo =(): JSX.Element =>{
     const {todos,completeTodo,deleteTodo,doneTodos}=useTodo();
     
 

@@ -17,6 +17,7 @@ export const TodoContext=createContext<ITodoContext | undefined>
 
 export const TodoProvider= ({children}: 
     PropsWithChildren) : any => {
+       
         const [todos,setTodos]=useState<TTodo[]>([]);
         const [doneTodos,setDoneTodos] =useState<TTodo[]>([]);
 

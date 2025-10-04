@@ -1,8 +1,10 @@
+import { useContext } from 'react';
 import { type TTodo } from '../types/todo';
+import { TodoContext } from '../context/TodoContext';
 
 interface TodoListProps {
   title: string;
-  todos: TTodo[];
+  todos?: TTodo[];
   buttonLabel: string;
   buttonColor: string;
   onClick: (todo: TTodo) => void;
@@ -19,11 +21,11 @@ const TodoList = ({
     <div className="render-container_section">
       <h2 className="render-container_title">{title}</h2>
       <ul id="todo-list" className="render-container_list">
-        {todos.map((todo): any => (
+        {todos?.map((todo): any => (
           <li key={todo.id} className="render-container_item">
             <span className="render-container_item-text">{todo.text}</span>
             <button
-              onClick={(): void => onClick(todo)}
+              onClick={(): any => onClick(todo)}
               style={{
                 backgroundColor: buttonColor,
               }}
