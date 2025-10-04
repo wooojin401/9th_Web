@@ -1,7 +1,7 @@
 // src/components/Navbar.tsx
 import { NavLink } from "react-router-dom";
 
-export default function Navbar() {   // ✅ 반드시 default 있어야 함
+export default function Navbar() {   
   const navItems = [
     { path: "/movies/popular", label: "인기 영화" },
     { path: "/movies/now_playing", label: "상영 중" },
@@ -17,7 +17,7 @@ export default function Navbar() {   // ✅ 반드시 default 있어야 함
           to={item.path}
           className={({ isActive }) =>
             `font-semibold hover:text-purple-600 ${
-              isActive ? "text-purple-600" : "text-gray-700"
+              isActive ? "text-purple-10000" : "text-gray-700"
             }`
           }
         >
