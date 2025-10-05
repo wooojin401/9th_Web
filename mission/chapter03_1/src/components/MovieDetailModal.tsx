@@ -35,8 +35,10 @@ const MovieDetailModal = () => {
     useEffect(() => {
         const fetchMovieData = async () => {
             const accessToken = import.meta.env.VITE_API_KEY;
-            const detailPath = `https://api.themoviedb.org/3/movie/${movieId}?language=ko-KR`;
-            const creditsPath = `https://api.themoviedb.org/3/movie/${movieId}/credits?language=ko-KR`;
+            const baseUrl = import.meta.env.VITE_API_BASE_URL;
+            
+            const detailPath = `${baseUrl}/${movieId}?language=ko-KR`;
+            const creditsPath = `${baseUrl}/${movieId}/credits?language=ko-KR`;
 
             setIsPending(true);
             setIsError(false);
@@ -47,7 +49,7 @@ const MovieDetailModal = () => {
                         headers: { 'Authorization': `Bearer ${accessToken}` }
                     }),
                     fetch(creditsPath, {
-                        headers: { 'Authorization': 'Bearer ' + accessToken }
+                        headers: { 'Authorization': `Bearer ${accessToken}` }
                     })
                 ]);
 
