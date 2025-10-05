@@ -28,11 +28,16 @@ const TopRated = () => {
       setIsLoading(true); // 로딩 시작
       setError(null); // 에러 초기화
       try {
+        const accessToken = import.meta.env.VITE_API_KEY; 
+        if (!accessToken) {
+          throw new Error("API 키가 설정되지 않았습니다. .env 파일을 확인하세요.");
+        }
+
         const response = await fetch(
           `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=ko-KR&page=${page}&sort_by=vote_average.desc&without_genres=99,10755&vote_count.gte=200`,
           {
             headers: {
-              Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1ZDU1NzYxOWVkZDM2N2VlYTFhYTAzODhhY2Y2ZjcyNyIsIm5iZiI6MTc1OTM3OTQzNy45NjQsInN1YiI6IjY4ZGRmZmVkZWQ0OTZlODNmNTQwNWIyOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.46eqjVN2dAavrGgmju0sjR1nrEte9VX_whQLRXiMrII`, 
+              Authorization: `Bearer ${accessToken}`, 
               accept: "application/json",
             },
           }

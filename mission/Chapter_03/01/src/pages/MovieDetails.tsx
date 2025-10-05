@@ -35,12 +35,16 @@ const MovieDetails = () => {
       setError(null);
 
       try {
+        const accessToken = import.meta.env.VITE_API_KEY; // 환경 변수에서 API 키 가져오기
+        if (!accessToken) {
+          throw new Error("API 키가 설정되지 않았습니다. .env 파일을 확인하세요.");
+        }
         
         // 영화 상세 정보 API 호출
         const detailPath = `https://api.themoviedb.org/3/movie/${movieId}?language=ko-KR`;
         const detailResponse = await fetch(detailPath, {
           headers: {
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1ZDU1NzYxOWVkZDM2N2VlYTFhYTAzODhhY2Y2ZjcyNyIsIm5iZiI6MTc1OTM3OTQzNy45NjQsInN1YiI6IjY4ZGRmZmVkZWQ0OTZlODNmNTQwNWIyOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.46eqjVN2dAavrGgmju0sjR1nrEte9VX_whQLRXiMrII`,
+            Authorization: `Bearer ${accessToken}`,
             accept: "application/json",
           },
         });

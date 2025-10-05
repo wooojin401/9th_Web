@@ -28,11 +28,16 @@ const NowPlaying = () => {
       setIsLoading(true); // 로딩 시작
       setError(null); // 에러 초기화
       try {
+        const accessToken = import.meta.env.VITE_API_KEY; 
+        if (!accessToken) {
+          throw new Error("API 키가 설정되지 않았습니다. .env 파일을 확인하세요.");
+        }
+
         const response = await fetch(
-          `https://api.themoviedb.org/3/movie/now_playing?language=ko-KR&page=${page}`, // 페이지 번호를 동적으로 추가
+          `https://api.themoviedb.org/3/movie/now_playing?language=ko-KR&page=${page}`, 
           {
             headers: {
-              Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1ZDU1NzYxOWVkZDM2N2VlYTFhYTAzODhhY2Y2ZjcyNyIsIm5iZiI6MTc1OTM3OTQzNy45NjQsInN1YiI6IjY4ZGRmZmVkZWQ0OTZlODNmNTQwNWIyOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.46eqjVN2dAavrGgmju0sjR1nrEte9VX_whQLRXiMrII`, // 본인의 Bearer 토큰으로 교체하세요
+              Authorization: `Bearer ${accessToken}`, 
               accept: "application/json",
             },
           }
