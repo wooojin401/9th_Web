@@ -52,7 +52,7 @@ export default function MoviePage() {
       )}
 
       <div>
-        <DetailCard movie={movie} key={movie?.id} />
+        <DetailCard movie={movie} />
       </div>
     </>
   );
