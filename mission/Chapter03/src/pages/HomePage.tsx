@@ -12,7 +12,7 @@ const HomePage = () => {
         <div className="flex-grow flex items-center justify-center">
           <h1
             className={`text-5xl text-center bg-clip-text font-semibold text-transparent bg-gradient-to-r
-              transform transition-all duration-800 ease-in-out from-black/55 via-gray-500 to-white/55 slide-Up`}
+              transform transition-all duration-800 ease-in-out from-black/55 via-gray-500 to-white/55 animate-slideUp`}
             style={{ fontFamily: "sans-serif" }}
           >
             Welcome To MovieWorld

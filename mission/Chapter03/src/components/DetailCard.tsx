@@ -26,7 +26,7 @@ export default function DetailCard({ movie }: DetailCardProps) {
 
         {movie?.poster_path && (
           <img
-            className="rounded-lg shadow-2xl w-140 h-80 mt-10 slide-Right"
+            className="rounded-lg shadow-2xl w-140 h-80 mt-10 animate-slideRight"
             src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
             alt={movie?.title}
           />

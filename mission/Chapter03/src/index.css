@@ -11,33 +11,3 @@ body {
 
   font-family: Arial, Helvetica, sans-serif;
 }
-
-@keyframes slideRight {
-  from {
-    transform: translateX(200px);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-@keyframes slideUp {
-  from {
-    transform: translateY(50px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-.slide-Right {
-  animation: slideRight 1s ease-out forwards;
-}
-
-.slide-Up {
-  animation: slideUp 0.8s ease-in-out forwards;
-}
