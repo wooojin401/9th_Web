@@ -61,15 +61,23 @@ const createTodoElement = (todo: Todo, isDone: boolean): HTMLLIElement => {
   const button = document.createElement('button');
   button.classList.add('render-container__item-button');
 
+  // 버튼 모양은 조건으로 나눔
   if (isDone) {
     button.textContent = '삭제';
     button.style.backgroundColor = 'red';
-    button.addEventListener('click', (): void => deleteTask(todo));
   } else {
     button.textContent = '완료';
     button.style.backgroundColor = 'green';
-    button.addEventListener('click', (): void => completeTask(todo));
   }
+
+  // 클릭 이벤트는 한 번만 등록, 내부에서 분기
+  button.addEventListener('click', (): void => {
+    if (isDone) {
+      deleteTask(todo);
+    } else {
+      completeTask(todo);
+    }
+  });
 
   li.appendChild(button);
   return li;
