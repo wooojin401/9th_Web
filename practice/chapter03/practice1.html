@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <title>SPA</title>
+  <style>
+    body { font-family: sans-serif;}
+    nav { display: flex; gap: 12px; padding: 12px; border-bottom: 1px solid #eee; }
+    a { text-decoration: none; color: #2563eb; }
+    a:hover { text-decoration: underline; }
+    main { padding: 16px; }
+    .muted { color:#666; font-size:14px; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="#/">Home</a>
+    <a href="#/about">About</a>
+    <a href="#/contact">Contact</a>
+  </nav>
+
+  <main id="app"></main>
+
+  <script>
+    const routes = {
+      '/': () => `
+        <h1>Home</h1>
+        <p>해시(#) 라우팅으로 만든 초간단 SPA 데모!</p>
+        <p class="muted">주소를 #/about 처럼 바꾸면 전체 리로드 없이 내용만 바뀜.</p>
+      `,
+      '/about': () => `
+        <h1>About</h1>
+        <p>React Router 없이, hashchange 이벤트만으로 라우팅합니다.</p>
+      `,
+      '/contact': () => `
+        <h1>Contact</h1>
+        <p>문의:aaa@mail.com</p>
+      `,
+    };
+
+    function getPath() {
+      const hash = window.location.hash || '#/';
+      const url = new URL(hash.slice(1), window.location.origin);
+      return url.pathname || '/';
+    }
+
+    function render() {
+      const path = getPath();
+      const view = routes[path];
+      document.getElementById('app').innerHTML = view ? view() : '<h1>404 Not Found</h1>';
+    }
+
+    window.addEventListener('hashchange', render);
+    render();
+  </script>
+</body>
+</html>
