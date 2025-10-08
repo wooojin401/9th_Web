@@ -3,9 +3,13 @@ import { ReactElement } from "react";
 import useForm from "../hooks/useForm";
 import { UserSigninInformation, validateSignin } from "../utils/validate";
 import { useNavigate } from "react-router-dom";
+import { postSignin } from "../apis/auth";
+import { useLocalStorage } from "../hooks/useLocalStorage";
+import { LOCAL_STORAGE_KEY } from "../constants/keys";
 
 export default function LoginPage(): ReactElement {
     const nav = useNavigate();
+    const {setItem} = useLocalStorage(LOCAL_STORAGE_KEY.accessToken);
     const { values, errors, touched, getInputProps } = useForm<UserSigninInformation>({
         initialValue: {
             email: "",
@@ -15,7 +19,14 @@ export default function LoginPage(): ReactElement {
     });
 
     const handleSubmit = async () => {
-    };
+        try {
+          const res = await postSignin(values);
+          setItem(res.data.accessToken);
+          nav("/"); 
+        } catch (error: any) {
+          console.error(error?.message);
+        }
+      };
 
     const isDisabled =
         Object.values(errors || {}).some((error) => error.length > 0)
