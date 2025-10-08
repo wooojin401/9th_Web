@@ -1,8 +1,8 @@
-import type {FormEvent} from "react";
+import type {FormEvent, JSX} from "react";
 import { useState } from "react";
 import type { TTodo } from '../types/todo';
 
-const TodoBefore =(): any => {
+const TodoBefore =(): JSX.Element => {
     const [todos,setTodos]=useState<TTodo[]>([]);
     const [doneTodos,setDoneTodos] =useState<TTodo[]>([]);
     const [input,setInput]=useState<string>('');

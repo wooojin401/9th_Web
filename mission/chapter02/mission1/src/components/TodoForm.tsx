@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type JSX } from "react";
 import { type FormEvent } from "react";
 import { useTodo } from "../context/TodoContext";
 
@@ -9,7 +9,7 @@ import { useTodo } from "../context/TodoContext";
 
 
 
-const TodoForm = (): any => {
+const TodoForm = (): JSX.Element => {
   const [input,setInput]=useState<string>('');
   const {addTodo}=useTodo();
 
