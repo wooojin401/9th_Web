@@ -1,14 +1,14 @@
 import { useParams } from "react-router-dom";
 import { useEffect, type ReactElement, useState } from "react";
-import { type Movie } from "../types/Movie";
 import MovieCard from "../components/MovieCard";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { getMovies, type MovieCategory } from "../api/movie";
+import { useCustomFetch } from "../hooks/useCustomFetch";
+import type { Movie } from "../types/Movie";
+
+type MoviesPayload = { results: Movie[] };
 
 export default function MoviePage(): ReactElement {
-    const [isPending, setIsPending] = useState<boolean>(false);
-    const [isError, setIsError] = useState<boolean>(false);
-    const [movies, setMovies] = useState<Movie[]>([]);
     const [page, setPage] = useState<number>(1);
 
     const { category } = useParams<{
@@ -16,23 +16,10 @@ export default function MoviePage(): ReactElement {
     }>();
     const safeCategory = typeof category === "string" ? category : "popular";
 
-    useEffect((): void => {
-        const fetchMovies = async (): Promise<void> => {
-            setIsPending(true);
-
-            try {
-                const data = await getMovies({ category: safeCategory, page });
-
-                setMovies(data.results)
-            } catch {
-                setIsError(true);
-            } finally {
-                setIsPending(false);
-            }
-        };
-
-        fetchMovies();
-    }, [page, category]);
+    const { data, isLoading, isError } = useCustomFetch<MoviesPayload>(
+        () => getMovies({ category: safeCategory, page }),
+        [safeCategory, page]
+    );
 
     useEffect((): void => {
         setPage(1);
@@ -69,7 +56,7 @@ export default function MoviePage(): ReactElement {
                 </button >
             </div >
 
-            {isPending ? (
+            {isLoading ? (
                 <div className="flex item-center justify-center h-dvh">
                     <LoadingSpinner />
                 </div>
@@ -77,8 +64,8 @@ export default function MoviePage(): ReactElement {
                 <div
                     className='p-10 grid gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-4
                     lg:grid-cols-5 xl:grid-cols-6'>
-                    {movies &&
-                        movies.map((movie): ReactElement => (
+                    {data &&
+                        data.results.map((movie): ReactElement => (
                             <MovieCard key={movie.id} movie={movie} />
                         ))}
                 </div>

@@ -1,8 +1,9 @@
-import { useEffect, type ReactElement, useState } from "react";
-import { getCredits, getMovie } from "../api/movie";
+import { type ReactElement } from "react";
 import { useParams } from "react-router-dom";
+import { getCredits, getMovie } from "../api/movie";
 import type { Credits, MovieDetails } from "../types/Movie";
 import LoadingSpinner from "../components/LoadingSpinner";
+import { useCustomFetch } from "../hooks/useCustomFetch";
 
 function formatYear(dateStr?: string): string {
   if (!dateStr) return "";
@@ -23,48 +24,30 @@ export function buildImageUrl(
   return `https://image.tmdb.org/t/p/${size}${path}`;
 }
 
-const MovieDetailPage = (): ReactElement => {
-  const [isPending, setIsPending] = useState<boolean>(false);
-  const [isError, setIsError] = useState<boolean>(false);
-  const [detail, setDetail] = useState<MovieDetails | null>(null);
-  const [credits, setCredits] = useState<Credits | null>(null);
-  const [creditError, setCreditError] = useState<boolean>(false); 
+async function fetchDetailAndCredits(
+  movieId: string,
+): Promise<{ detail: MovieDetails; credits: Credits | null; creditError: boolean }> {
+  const [detailData, maybeCredits] = await Promise.all([
+    getMovie({ movieId, language: "ko-KR" }),
+    (async () => {
+      try {
+        return await getCredits({ movieId, language: "ko-KR" });
+      } catch {
+        return null;
+      }
+    })(),
+  ]);
+  return { detail: detailData, credits: maybeCredits, creditError: !maybeCredits };
+}
 
+const MovieDetailPage = (): ReactElement => {
   const { movieId } = useParams<{ movieId: string }>();
   const safeMovieId = typeof movieId === "string" ? movieId : "1";
 
-  useEffect((): void => {
-    const run = async (): Promise<void> => {
-      setIsPending(true);
-      setIsError(false);
-      setCreditError(false);
-      setDetail(null);
-      setCredits(null);
-
-      try {
-        const [detailData, maybeCredits] = await Promise.all([
-          getMovie({ movieId: safeMovieId, language: "ko-KR" }),
-          (async () => {
-            try {
-              return await getCredits({ movieId: safeMovieId, language: "ko-KR" });
-            } catch {
-              setCreditError(true);
-              return null;
-            }
-          })(),
-        ]);
-
-        setDetail(detailData);
-        setCredits(maybeCredits);
-      } catch {
-        setIsError(true);
-      } finally {
-        setIsPending(false);
-      }
-    };
-
-    run();
-  }, [safeMovieId]);
+  const { data, isLoading, isError } = useCustomFetch(
+    () => fetchDetailAndCredits(safeMovieId),
+    [safeMovieId]
+  );
 
   if (isError) {
     return (
@@ -74,13 +57,15 @@ const MovieDetailPage = (): ReactElement => {
     );
   }
 
-  if (isPending || !detail) {
+  if (isLoading || !data?.detail) {
     return (
       <div className="flex item-center justify-center h-dvh">
         <LoadingSpinner />
       </div>
     );
   }
+
+  const { detail, credits, creditError } = data;
 
   const posterUrl = buildImageUrl(detail.poster_path, "w500");
   const year = formatYear(detail.release_date);
@@ -187,7 +172,7 @@ const MovieDetailPage = (): ReactElement => {
                 credit 정보를 불러올 수 없습니다.
               </p>
             ) : (
-              <ul className="mt-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              <ul className="mt-2 grid grid-cols-1 sm:grid-cols-2 lg:gridCols-3 gap-3">
                 {castTop.map((c) => (
                   <li
                     key={`${c.credit_id}-${c.id}`}

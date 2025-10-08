@@ -21,22 +21,21 @@ interface GetMovieParams {
 export async function getMovies({
     category,
     page = 1,
-    language = "ko-KR",
+    language = "ko-KR"
 }: GetMoviesParams): Promise<MovieRes> {
     const { data } = await api.get<MovieRes>(`/movie/${category}`, {
-        params: { language, page },
+        params: { language, page }
     });
     return data;
 }
 
 export async function getMovie({
     movieId,
-    language = "ko-KR",
+    language = "ko-KR"
 }: GetMovieParams): Promise<MovieDetails> {
     const { data } = await api.get<MovieDetails>(`/movie/${movieId}`, {
         params: { language },
     });
-    console.log(data);
     return data;
 }
 
