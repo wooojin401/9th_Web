@@ -32,7 +32,6 @@ export function useSign() {
     return isValid;
   };
 
-  // ✅ 실시간 유효성 검사 (핵심)
   useEffect(() => {
     const pwValid = validatePassword(password);
     const confirmValid = validateConfirmPassword(confirmPassword, password);
@@ -58,7 +57,6 @@ export function useSign() {
   const validateEmailStep = () => validateEmail(email);
 
   const validatePasswordStep = () => {
-    // ✅ 이 부분은 실시간으로 이미 갱신되므로 단순 반환
     return isPasswordValid;
   };
 

@@ -94,7 +94,6 @@ Access Token: 짧은 수명, API 요청 시 인증용
 Refresh Token: 긴 수명, AccessToken 재발급용 (HttpOnly 쿠키 저장 권장)
 
 흐름
-
 로그인 → Access+Refresh 발급
 → Access로 요청
 → 만료 시 Refresh로 재발급

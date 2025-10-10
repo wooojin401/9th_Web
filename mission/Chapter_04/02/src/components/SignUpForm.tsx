@@ -50,7 +50,6 @@ const SignUpForm = () => {
 
   return (
     <div className="text-white px-6 py-4 shadow-md items-center gap-4 flex flex-col min-h-screen">
-      {/* 상단 헤더 */}
       <div className="flex items-center justify-between w-full max-w-xs mb-6 mt-4">
         <button
           onClick={() => {
@@ -66,7 +65,6 @@ const SignUpForm = () => {
         <div className="w-6" />
       </div>
 
-      {/* ---------------- 1️⃣ 이메일 입력 ---------------- */}
       {!showPasswordForm && !showNicknameForm && (
         <div className="flex flex-col gap-3 w-full max-w-xs">
           <input
@@ -98,7 +96,6 @@ const SignUpForm = () => {
         </div>
       )}
 
-      {/* ---------------- 2️⃣ 비밀번호 입력 ---------------- */}
       {showPasswordForm && !showNicknameForm && (
         <div className="flex flex-col gap-3 w-full max-w-xs mt-5">
           <div className="flex items-center gap-2 px-4 py-3 w-full">
@@ -106,7 +103,6 @@ const SignUpForm = () => {
             <span className="text-gray-300 text-sm truncate">{email}</span>
           </div>
 
-          {/* 비밀번호 입력 */}
           <div className="relative flex flex-col">
             <input
               type={showPassword ? "text" : "password"}
@@ -131,7 +127,6 @@ const SignUpForm = () => {
             )}
           </div>
 
-          {/* 비밀번호 확인 */}
           <div className="relative flex flex-col">
             <input
               type={showConfirmPassword ? "text" : "password"}
@@ -170,13 +165,10 @@ const SignUpForm = () => {
         </div>
       )}
 
-      {/* ---------------- 3️⃣ 닉네임 설정 ---------------- */}
       {showNicknameForm && (
         <div className="flex flex-col gap-4 w-full max-w-xs items-center mt-8">
-          {/* 프로필 이미지 (기본 아이콘) */}
           <UserCircle className="w-28 h-28 text-gray-400 mb-4" />
 
-          {/* 닉네임 입력 */}
           <input
             type="text"
             value={nickname}
@@ -195,7 +187,6 @@ const SignUpForm = () => {
             <p className="text-red-500 text-xs mt-1">{nicknameError}</p>
           )}
 
-          {/* 회원가입 완료 버튼 */}
           <button
             onClick={handleSignUp}
             disabled={nickname.trim().length < 2}
