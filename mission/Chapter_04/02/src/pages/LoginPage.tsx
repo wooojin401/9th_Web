@@ -4,7 +4,6 @@ const LoginPage = () => {
   return (
     <div className="bg-black h-screen pt-50">
         <Login />
-     
     </div>
   )
 }
