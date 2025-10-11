@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type DependencyList } from 'react';
 
-type FetchFactory<T> = () => Promise<T>;
+type FetchFactory<T> = (signal?: AbortSignal) => Promise<T>;
 
 export function useCustomFetch<T>(factory: FetchFactory<T>, deps: DependencyList = []) {
   const [data, setData] = useState<T | null>(null);
@@ -10,14 +10,19 @@ export function useCustomFetch<T>(factory: FetchFactory<T>, deps: DependencyList
 
   const run = async () => {
     setIsLoading(true);
+    setIsError(false);
+
     controllerRef.current?.abort();
     controllerRef.current = new AbortController();
 
     try {
-      const result = await factory();
+      const result = await factory(controllerRef.current.signal);
       setData(result);
     } catch (e: any) {
-      setIsError(true);
+      if (e?.name === 'AbortError') {
+      } else {
+        setIsError(true);
+      }
     } finally {
       setIsLoading(false);
     }
