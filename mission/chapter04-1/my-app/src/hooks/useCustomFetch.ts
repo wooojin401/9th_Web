@@ -18,6 +18,10 @@ export function useCustomFetch<T>(url: string) {
   useEffect(() => {
     if (!url) return;
 
+    //  AbortController 생성
+    const controller = new AbortController();
+    const { signal } = controller;
+
     const fetchData = async () => {
       try {
         setState({ data: null, loading: true, error: null });
@@ -27,15 +31,18 @@ export function useCustomFetch<T>(url: string) {
             Authorization: `Bearer ${import.meta.env.VITE_TMDB_KEY}`,
             Accept: "application/json",
           },
+          signal,
         });
 
         setState({ data: res.data, loading: false, error: null });
       } catch (err) {
-        // ✅ AxiosError 여부 확인
+        if (axios.isCancel(err) || (err as AxiosError).code === "ERR_CANCELED") {
+          console.warn("요청이 취소되었습니다:", url);
+          return;
+        }
+
         if (axios.isAxiosError(err)) {
           const axiosError = err as AxiosError;
-
-          // 서버 응답이 있는 경우 (ex. 404, 500)
           if (axiosError.response) {
             setState({
               data: null,
@@ -45,17 +52,13 @@ export function useCustomFetch<T>(url: string) {
                 "요청을 처리할 수 없습니다."
               }`,
             });
-          }
-          // 요청은 갔지만 응답이 없는 경우 (네트워크 오류 등)
-          else if (axiosError.request) {
+          } else if (axiosError.request) {
             setState({
               data: null,
               loading: false,
-              error: "서버로부터 응답이 없습니다. 네트워크 상태를 확인하세요.",
+              error: "서버 응답이 없습니다. 네트워크 상태를 확인하세요.",
             });
-          }
-          // 요청 자체가 실패한 경우
-          else {
+          } else {
             setState({
               data: null,
               loading: false,
@@ -63,7 +66,6 @@ export function useCustomFetch<T>(url: string) {
             });
           }
         } else {
-          // AxiosError가 아닌 일반적인 오류 처리
           setState({
             data: null,
             loading: false,
@@ -74,6 +76,10 @@ export function useCustomFetch<T>(url: string) {
     };
 
     fetchData();
+
+    return () => {
+      controller.abort();
+    };
   }, [url]);
 
   return state; // { data, loading, error }
