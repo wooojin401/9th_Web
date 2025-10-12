@@ -1,10 +1,8 @@
-// src/pages/MovieDetailPage.tsx (수정된 내용)
-
 import type { ReactElement } from "react";
 import { useParams } from "react-router-dom";
 import type { MovieDetails, Credits, CastMember } from "../types/movie";
 
-// ⭐️ 커스텀 훅 임포트 ⭐️
+// 커스텀 훅 임포트
 import { useCustomFetch } from "../hooks/useCustomFetch";
 
 // TMDB API 관련 변수 (API_KEY는 환경변수에서 가져오므로 BASE_URL만 사용)

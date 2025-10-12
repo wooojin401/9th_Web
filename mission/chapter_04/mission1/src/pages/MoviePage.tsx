@@ -1,6 +1,6 @@
 import { useState, type ReactElement } from "react";
 import MovieCard from "../components/MovieCard";
-import type { Movie, MovieResponse } from "../types/movie";
+import type { MovieResponse } from "../types/movie";
 import { LoadingSpinner } from "../components/LoadingSpinner";
 import { useParams } from "react-router-dom";
 // 커스텀 훅 임포트
