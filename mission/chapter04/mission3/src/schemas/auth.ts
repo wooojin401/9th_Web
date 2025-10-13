@@ -48,3 +48,5 @@ export const signupStep3Schema = z.object({ nickname: nicknameSchema });
 export type SignupStep1 = z.infer<typeof signupStep1Schema>;
 export type SignupStep2 = z.infer<typeof signupStep2Schema>;
 export type SignupStep3 = z.infer<typeof signupStep3Schema>;
+export type SignupStep = 1 | 2 | 3;
+

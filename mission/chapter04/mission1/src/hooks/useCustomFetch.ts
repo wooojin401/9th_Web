@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import type { AxiosError } from "axios";
 import { tmdb } from "../lib/tmdb";
 
 export default function useCustomFetch<T>(endpoint: string, params = {}) {
@@ -7,24 +8,35 @@ export default function useCustomFetch<T>(endpoint: string, params = {}) {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    let cancelled = false;
+    const controller = new AbortController();
+    const signal = controller.signal;
 
     (async () => {
       setIsLoading(true);
       setError(null);
+
       try {
-        const { data } = await tmdb.get<T>(endpoint, { params });
-        if (!cancelled) setData(data);
-      } catch (e: any) {
-        if (!cancelled)
-          setError(e?.response?.status ? `HTTP ${e.response.status}` : "요청 실패");
+        const { data } = await tmdb.get<T>(endpoint, { params, signal });
+        setData(data);
+      } catch (e) {
+        const err = e as AxiosError;
+
+        if (signal.aborted) return;
+
+        if (err.response) {
+          setError(`HTTP ${err.response.status}`);
+        } else if (err.code === "ERR_CANCELED") {
+          console.log("요청이 취소되었습니다.");
+        } else {
+          setError("요청 실패");
+        }
       } finally {
-        if (!cancelled) setIsLoading(false);
+        if (!signal.aborted) setIsLoading(false);
       }
     })();
 
     return () => {
-      cancelled = true;
+      controller.abort();
     };
   }, [endpoint, JSON.stringify(params)]);
 
