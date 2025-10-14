@@ -1,0 +1,52 @@
+/* src/styles/LoginPage.css */
+.login-container {
+  max-width: 360px;
+  margin: 100px auto;
+  text-align: center;
+  font-family: "Pretendard", sans-serif;
+}
+
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.error {
+  color: #ff5a5a;
+  font-size: 0.9rem;
+  margin-top: 4px;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.login-btn.disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.login-btn.active {
+  background-color: #007bff;
+  color: white;
+}
